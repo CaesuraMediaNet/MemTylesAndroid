@@ -2,10 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Text, View } from 'react-native';
 
 export default function GameClock ({action, gameTime}) {
     const [timePlayed,setTimePlayed]  = useState(0);

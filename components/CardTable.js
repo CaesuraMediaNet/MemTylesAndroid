@@ -6,6 +6,7 @@ import {
 	View,
 }                          from 'react-native';
 export default function CardTable ({board, Card, handleTyleClick, numCards}) {
+	console.log ("numCards : ", numCards);
 	return board.map (card => {
 			let width = "25%";
 			switch (parseInt (numCards)) {

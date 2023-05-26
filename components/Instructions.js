@@ -6,15 +6,14 @@ import styles from '../styles/memtyles.module.css';
 import CardTable from './CardTable';
 import Card from './Card';
 import MtRow from '../components/MtRow';
-import Container from 'react-bootstrap/Container';
-import BsCard from 'react-bootstrap/Card';
+import { Text, View } from 'react-native';
 
 // https://www.npmjs.com/package/shaka-player-react
 // Next.js config.
 //
-import dynamic from 'next/dynamic';
-const ShakaPlayer = dynamic(() => import('shaka-player-react'), { ssr: false });
-import 'shaka-player/dist/controls.css';
+// import dynamic from 'next/dynamic';
+// const ShakaPlayer = dynamic(() => import('shaka-player-react'), { ssr: false });
+// import 'shaka-player/dist/controls.css';
 
 function handleTyleClick () {
 	return null;
@@ -25,9 +24,9 @@ import {startBoard, wonBoard, twoMatching, twoMisMatching, oneSelected, twoMatch
 
 export default function Instructions () {
 	return (
-		<Container fluid>
-			<BsCard className={styles.BsCardStyle}>
-				<div className={styles.desktopMaxWidth}>
+		<View>
+			<View className={styles.BsCardStyle}>
+				<View className={styles.desktopMaxWidth}>
 					<p className={styles.instructionP}>
 						The board is made up of pairs of pictures, or Tyles as we call them, like this :
 					</p>
@@ -139,10 +138,10 @@ export default function Instructions () {
 					<p className={styles.instructionP}>
 						Here is a video showing a game being played.
 					</p>
-					<ShakaPlayer src="/video/DemoVideo.mpd" />
-				</div>
-			</BsCard>
-		</Container>
+					{/*<ShakaPlayer src="/video/DemoVideo.mpd" />*/}
+				</View>
+			</View>
+		</View>
 	);
 }
 
