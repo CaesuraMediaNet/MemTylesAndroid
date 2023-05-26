@@ -29,6 +29,9 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import {initBoard} from './components/boards';
+import Card        from './components/Card';
+import CardTable   from './components/CardTable';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -59,13 +62,19 @@ const App: () => Node = () => {
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
 			<Button title="Clear Board" />
+			<CardTable
+				board={board}
+				Card={Card}
+				handleTyleClick={handleTyleClick}
+				numCards={numCards}
+			>
+			</CardTable>
 			<Text>
-				{board.map ((card, index) => {
-					console.log ("card.icon : ", card.icon);
+				{/*board.map ((card, index) => {
 					return (
-						<Text key={card.id}>{card.cardName} </Text>
+						<FontAwesomeIcon key={card.id} icon={ card.icon } />
 					);
-				})};
+				})*/};
 			</Text>
 			<Text>Goes : </Text>
 			<Text>00:00:00</Text>

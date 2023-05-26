@@ -1,8 +1,13 @@
 // Card table of Tyles (aka Cards).
 //
 import React from 'react';
+import {
+	Text,
+	View,
+}                          from 'react-native';
 export default function CardTable ({board, Card, handleTyleClick, numCards}) {
 	return board.map (card => {
+			console.log ("Card : ", card.cardName);
 			let width = "25%";
 			switch (parseInt (numCards)) {
 				case 4 :
@@ -26,7 +31,8 @@ export default function CardTable ({board, Card, handleTyleClick, numCards}) {
 					width = "25%";
 			}
 			return (
-				<div key={card.id} style={{ width : width }}>
+				<View key={card.id} style={{ width : "100%" }}>
+					<Text key={card.id + 1}>{card.cardName}</Text>
 					<Card 
 						key={card.id}
 						id={card.id}
@@ -39,7 +45,7 @@ export default function CardTable ({board, Card, handleTyleClick, numCards}) {
 						colour={card.colour}
 						cardName={card.cardName}
 					/>
-				</div>
+				</View>
 			);
 		});
 	}

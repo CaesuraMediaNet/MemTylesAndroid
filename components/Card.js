@@ -5,34 +5,29 @@ import React from 'react';
 import { useState }        from 'react';
 import { useEffect }       from 'react';
 import { useRef }          from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+	Text,
+	View,
+	StyleSheet,
+}                          from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPuzzlePiece }   from '@fortawesome/free-solid-svg-icons'
 import styles              from '../styles/memtyles.module.css';
 
 export default function Card ({id, icon, width, height, clicked, flipped, won, colour, cardName}) {
 
-	// Next.js CSS Modules come in as classes, here we want CSS styles, not classNames.
-	//
-    let iconStyle = {
-        color   : colour,
-        padding : "5px",
-        height  : "100%",
-        width   : "100%",
-    }
-    let blankStyle         = {...iconStyle, color   : "dimgray"};
-    let selectedStyle      = {...iconStyle, border  : "1px solid green", borderRadius : "0.2rem",};
-    let wonStyle           = {...iconStyle, opacity : 0.6};
+    let blankStyle         = cardStyles.blankStyle;
+    let selectedStyle      = cardStyles.selectedStyle;
+    let wonStyle           = cardStyles.wonStyle;
 
     // Some icons are bigger than others moving the page about.
     //
-    let reduceSelectedBigIconStyle = {...selectedStyle, width : "75%"};
-    let reduceWonBigIconStyle      = {...wonStyle,      width : "75%"};
     if (cardName.match (/Moon|Brush|Lemon|Bell|HourglassStart/i)) {
-        selectedStyle = reduceSelectedBigIconStyle;
-		wonStyle      = reduceWonBigIconStyle;
+        selectedStyle = cardStyles.reduceSelectedBigIconStyle;
+		wonStyle      = cardStyles.reduceWonBigIconStyle;
     }
     return (
-        <div className={styles.cardStyle} onClick={clicked} >
+        <View className={styles.cardStyle} onClick={clicked} >
             {flipped ?
                 <FontAwesomeIcon style={selectedStyle} icon={icon} />
                 : won ?
@@ -40,7 +35,51 @@ export default function Card ({id, icon, width, height, clicked, flipped, won, c
                 :
                 <FontAwesomeIcon style={blankStyle}    icon={faPuzzlePiece} />
             }
-        </div>
+        </View>
     );
 }
 
+const cardStyles = StyleSheet.create({
+    iconStyle : {
+        color   : 'dimgray',
+        padding : 5,
+        height  : '100%',
+        width   : '100%',
+    },
+	blankStyle : {
+        color   : 'dimgray',
+        padding : 5,
+        height  : '100%',
+        width   : '100%',
+	},
+	selectedStyle : {
+        color   : 'dimgray',
+        padding : 5,
+        height  : '100%',
+        width   : '100%',
+		border  : '1px solid green',
+		borderRadius : '0.2rem',
+	},
+	wonStyle : {
+        color   : 'dimgray',
+        padding : 5,
+        height  : '100%',
+        width   : '100%',
+		opacity : 0.6,
+	},
+	reduceSelectedBigIconStyle : {
+        color   : 'dimgray',
+        padding : 5,
+        height  : '100%',
+        width   : '75%',
+		border  : '1px solid green',
+		borderRadius : '0.2rem',
+	},
+	reduceWonBigIconStyle : {
+        color   : 'dimgray',
+        padding : 5,
+        height  : '100%',
+        width   : '75%',
+		opacity : 0.6,
+	}
+});
