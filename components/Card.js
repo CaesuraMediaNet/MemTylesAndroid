@@ -27,7 +27,7 @@ export default function Card ({id, icon, width, height, clicked, flipped, won, c
 		wonStyle      = cardStyles.reduceWonBigIconStyle;
     }
     return (
-        <View className={styles.cardStyle} onClick={clicked} >
+        <View onClick={clicked} >
             {flipped ?
                 <FontAwesomeIcon style={selectedStyle} icon={icon} />
                 : won ?

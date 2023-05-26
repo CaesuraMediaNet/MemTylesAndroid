@@ -7,7 +7,6 @@ import {
 }                          from 'react-native';
 export default function CardTable ({board, Card, handleTyleClick, numCards}) {
 	return board.map (card => {
-			console.log ("Card : ", card.cardName);
 			let width = "25%";
 			switch (parseInt (numCards)) {
 				case 4 :
@@ -31,8 +30,7 @@ export default function CardTable ({board, Card, handleTyleClick, numCards}) {
 					width = "25%";
 			}
 			return (
-				<View key={card.id} style={{ width : "100%" }}>
-					<Text key={card.id + 1}>{card.cardName}</Text>
+				<View key={card.id} style={{ width : width }}>
 					<Card 
 						key={card.id}
 						id={card.id}
