@@ -23,7 +23,7 @@ export default function WonModal ({numClicks, gameTime, numTyles}) {
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>OK!</Text>
+              <Text style={styles.textStyle}>&nbsp;OK!&nbsp;</Text>
             </Pressable>
           </View>
         </View>

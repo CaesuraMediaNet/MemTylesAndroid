@@ -22,6 +22,7 @@ import {
   useColorScheme,
   View,
   Button,
+  FlatList,
 } from 'react-native';
 
 // FontAwesome.
@@ -38,7 +39,7 @@ import SelectDropdown from 'react-native-select-dropdown'
 // Local Components.
 //
 import Card         from './components/Card';
-import GameClock    from './components/scores';
+import GameClock    from './components/GameClock';
 // import WonModal     from './components/WonModal';
 import MtRow        from './components/MtRow';
 import CardTable    from './components/CardTable';
@@ -50,9 +51,7 @@ import {initBoard}  from './components/boards';
 //
 import shuffleCards from './functions/shuffleCards';
 import flipCard from './functions/flipCard';
-// import {addScore, getScores, clearScores} from './functions/scores';
-
-
+import {addScore, getScores, clearScores} from './functions/scores';
 
 const App: () => Node = () => {
     const [board, setBoard]                         = useState (initBoard);
@@ -69,8 +68,13 @@ const App: () => Node = () => {
     const instructionsRef                           = useRef();
 
   useEffect(() => {
-        let shuffledBoard = shuffleCards(initBoard.slice(), numCards);
-        setBoard        (shuffledBoard);
+		async function getGetScores () {
+			let currentScores   = await getScores();
+			setScores ((scores) => currentScores);
+		}
+        let shuffledBoard   = shuffleCards(initBoard.slice(), numCards);
+        setBoard (shuffledBoard);
+		getGetScores ();
     }, [numCards])
 
   const isDarkMode = useColorScheme() === 'dark';
@@ -100,15 +104,15 @@ const App: () => Node = () => {
     }
     // When a game is won this is called.
     //
-    function timeGameTook ({timeS}) {
+    async function timeGameTook ({timeS}) {
         setGameTime ((gameTime) => timeS);
         let thisGame = {
             numCards  : numCards,
             numClicks : numClicks,
             gameTime  : timeS,
         }
-        // let allScores = addScore (thisGame);
-        // setScores (allScores);
+        let allScores = await addScore (thisGame);
+        setScores (allScores);
     }
     function clearBoard () {
 		console.log ("clearBoard called");
@@ -127,7 +131,6 @@ const App: () => Node = () => {
         setNumCards  (selectedItem);
         clearBoard ();
     }
-
 	function SelectNumCards () {
 		return (
 			<SelectDropdown
@@ -136,6 +139,30 @@ const App: () => Node = () => {
 			/>
 		);
 	}
+	function ScoreItem ({gameTime, numCards, numClicks}) {
+		return (
+			<View>
+				<Text>{numCards} cards in {numClicks} clicks and {gameTime} seconds</Text>
+			</View>
+		);
+	}
+	function ScoresTable () {
+		return (
+			<View>
+				{scores.map((score, index) => {
+					return (
+						<ScoreItem
+							key={index}
+							gameTime={score.gameTime}
+							numCards={score.numCards}
+							numClicks={score.numClicks}
+						/>
+					);
+				})}
+			</View>
+		);
+	}
+
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -167,10 +194,10 @@ const App: () => Node = () => {
 			<SelectNumCards />
 			{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
 			{/*
-			<Text>Past Scores</Text>
 			<Text>Instructions</Text>
 			*/}
         </View>
+		{scores.length > 0 && <ScoresTable />}
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,24 +1,34 @@
-// Scores kept in Cookies, maybe a database later.
-//
-import React from 'react';
-import Cookies from 'js-cookie';
-
-export function addScore (score) {
-	let scores = getScores ();
+import AsyncStorage from '@react-native-async-storage/async-storage';
+export async function addScore (score) {
+  try {
+	let scores = await getScores ();
 	scores.push (score);
-	Cookies.set('scores', JSON.stringify (scores));
-	return scores;
+    await AsyncStorage.setItem('@storage_Key', JSON.stringify(scores))
+	  return scores;
+  } catch (err) {
+    console.log ("Error with AsyncStorage.setItem : ", err);
+	return [];
+  }
 }
-export function getScores () {
-	let scores = Cookies.get('scores');
-	if (!scores?.length) {
-		scores = [];
-	} else {
-		scores = JSON.parse (scores);
+export async function getScores () {
+	try {
+		let scores = await AsyncStorage.getItem('@storage_Key')
+		if (!scores?.length) {
+			scores = [];
+		} else {
+			scores = JSON.parse (scores);
+		}
+		return scores;
+	} catch (err) {
+		console.log ("Error with AsyncStorage.getItem : ", err);
+		return [];
 	}
-	return scores;
 }
-export function clearScores () {
-	Cookies.set('scores', JSON.stringify ([]));
+export async function clearScores () {
+	try {
+		await AsyncStorage.setItem('@storage_Key', JSON.stringify([]))
+	} catch (err) {
+		console.log ("Error with AsyncStorage.getItem : ", err);
+	}
+	return [];
 }
-
