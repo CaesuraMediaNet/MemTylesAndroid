@@ -91,11 +91,14 @@ const App: () => Node = () => {
 		<Text style={{fontSize : 36, fontWeight : 'bold' }}>
 			MemTyles
 		</Text>
+		<Button title="Clear Board" />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
+			flex          : 1,
+			flexDirection : 'row',
+			 flexWrap     : 'wrap',
           }}>
-			<Button title="Clear Board" />
 			<CardTable
 				board={board}
 				Card={Card}
