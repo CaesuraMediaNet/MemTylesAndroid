@@ -24,10 +24,16 @@ import {
   Button,
 } from 'react-native';
 
+// FontAwesome.
+//
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+
+// Other community libs.
+//
+import SelectDropdown from 'react-native-select-dropdown'
 
 // Local Components.
 //
@@ -83,8 +89,6 @@ const App: () => Node = () => {
             );
         }
     }
-
-
     function handleTyleClick (card) {
         let { won, wonAll } = flipCard (card, numClicks, setNumClicks, board, setBoard);
         if (won)    setWonPlay    (true);
@@ -117,7 +121,20 @@ const App: () => Node = () => {
         if (wonAllPlay) action = "restart";
         setTimerAction ((timerAction) => action);
     }
+	function changeNumCards (selectedItem) {
+		console.log ("changeNumCards : ", selectedItem);
+        setNumCards  (selectedItem);
+        clearBoard ();
+    }
 
+	function SelectNumCards () {
+		return (
+			<SelectDropdown
+				data={[4, 12, 16, 20, 36, 42, 56]}
+				onSelect={(selectedItem, index) => {changeNumCards(selectedItem) }}
+			/>
+		);
+	}
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -146,8 +163,11 @@ const App: () => Node = () => {
 			<Progress />
 			<GameClock gameTime={timeGameTook} action={timerAction}  />
 			<Text>Select Number of Tyles</Text>
+			<SelectNumCards />
+			{/*
 			<Text>Past Scores</Text>
 			<Text>Instructions</Text>
+			*/}
         </View>
       </ScrollView>
     </SafeAreaView>
