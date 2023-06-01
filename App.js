@@ -52,6 +52,8 @@ import shuffleCards from './functions/shuffleCards';
 import flipCard from './functions/flipCard';
 import {addScore, getScores, clearScores} from './functions/scores';
 
+
+
 const App: () => Node = () => {
     const [board, setBoard]                         = useState (initBoard);
     const [wonPlay, setWonPlay]                     = useState (false);
@@ -62,6 +64,7 @@ const App: () => Node = () => {
     const [timerAction,setTimerAction]              = useState("start");
     const [scores,setScores]                        = useState ([]);
     const [showPrivacyLink, setShowPrivacyLink]     = useState (false);
+    const [instructionsY, setInstructionsY]         = useState (100);
 
     const numCardsRef                               = useRef();
     const instructionsRef                           = useRef();
@@ -161,6 +164,10 @@ const App: () => Node = () => {
 			</View>
 		);
 	}
+	function scrollToInstructions () {
+        instructionsRef.current.scrollTo({ y : instructionsY, animated : true} );
+    }
+
 
 
   return (
@@ -169,11 +176,14 @@ const App: () => Node = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
 		keyboardShouldPersistTaps='handled'
-        style={backgroundStyle}>
+        style={backgroundStyle}
+		ref={instructionsRef}
+      >
 		<Text style={{fontSize : 36, fontWeight : 'bold' }}>
 			MemTyles
 		</Text>
 		<Button onPress={clearBoard} title="Clear Board" />
+		<Button onPress={scrollToInstructions} title="How to Play" />
         <View
           style={{
 			backgroundColor : isDarkMode ? Colors.black : Colors.white,
@@ -194,7 +204,14 @@ const App: () => Node = () => {
 			{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
         </View>
 		{scores.length > 0 && <ScoresTable />}
-		<Instructions />
+		<View
+			  onLayout={event => {
+				const layout = event.nativeEvent.layout;
+				setInstructionsY (event?.nativeEvent?.layout?.y || 100)
+			}}
+		>
+			<Instructions />
+		</View>
       </ScrollView>
     </SafeAreaView>
   );
