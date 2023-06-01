@@ -43,6 +43,7 @@ import GameClock    from './components/scores';
 import MtRow        from './components/MtRow';
 import CardTable    from './components/CardTable';
 import Instructions from './components/Instructions';
+import WonModal     from './components/WonModal';
 import {initBoard}  from './components/boards';
 
 // Local functions.
@@ -164,6 +165,7 @@ const App: () => Node = () => {
 			<GameClock gameTime={timeGameTook} action={timerAction}  />
 			<Text>Select Number of Tyles</Text>
 			<SelectNumCards />
+			{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
 			{/*
 			<Text>Past Scores</Text>
 			<Text>Instructions</Text>
