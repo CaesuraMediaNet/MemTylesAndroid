@@ -8,27 +8,28 @@
 
 import React from 'react';
 
-import { useState } from 'react';
+import { useState }  from 'react';
 import { useEffect } from 'react';
-import { useRef } from 'react';
+import { useRef }    from 'react';
 
-import type {Node} from 'react';
+import type {Node}   from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Button,
-  FlatList,
+	SafeAreaView,
+	ScrollView,
+	StatusBar,
+	StyleSheet,
+	Text,
+	useColorScheme,
+	View,
+	Button,
+	FlatList,
+	Pressable,
 } from 'react-native';
 
 // FontAwesome.
 //
 import {
-  Colors,
+	Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
@@ -53,23 +54,24 @@ import flipCard from './functions/flipCard';
 import {addScore, getScores, clearScores} from './functions/scores';
 
 
-
+// The MemTyles App.
+//
 const App: () => Node = () => {
-    const [board, setBoard]                         = useState (initBoard);
-    const [wonPlay, setWonPlay]                     = useState (false);
-    const [wonAllPlay, setWonAllPlay]               = useState (false);
-    const [numCards, setNumCards]                   = useState (12);
-    const [numClicks, setNumClicks]                 = useState (0);
+    const [board, setBoard]                         = useState(initBoard.slice());
+    const [wonPlay, setWonPlay]                     = useState(false);
+    const [wonAllPlay, setWonAllPlay]               = useState(false);
+    const [numCards, setNumCards]                   = useState(12);
+    const [numClicks, setNumClicks]                 = useState(0);
     const [gameTime,setGameTime]                    = useState(0);
     const [timerAction,setTimerAction]              = useState("start");
-    const [scores,setScores]                        = useState ([]);
-    const [showPrivacyLink, setShowPrivacyLink]     = useState (false);
-    const [instructionsY, setInstructionsY]         = useState (100);
+    const [scores,setScores]                        = useState([]);
+    const [showPrivacyLink, setShowPrivacyLink]     = useState(false);
+    const [instructionsY, setInstructionsY]         = useState(100);
 
     const numCardsRef                               = useRef();
     const instructionsRef                           = useRef();
 
-  useEffect(() => {
+	useEffect(() => {
 		async function getGetScores () {
 			let currentScores   = await getScores();
 			setScores ((scores) => currentScores);
@@ -77,16 +79,10 @@ const App: () => Node = () => {
         let shuffledBoard   = shuffleCards(initBoard.slice(), numCards);
         setBoard (shuffledBoard);
 		getGetScores ();
-    }, [numCards])
+	}, [numCards])
 
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-     function Progress () {
-        if (wonAllPlay) {
+	function Progress () {
+		if (wonAllPlay) {
             return (
                 <Text>You did {numCards} Tyles in {numClicks} goes and {gameTime} seconds</Text>
             );
@@ -168,56 +164,59 @@ const App: () => Node = () => {
         instructionsRef.current.scrollTo({ y : instructionsY, animated : true} );
     }
 
-
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-		keyboardShouldPersistTaps='handled'
-        style={backgroundStyle}
-		ref={instructionsRef}
-      >
-		<Text style={{fontSize : 36, fontWeight : 'bold' }}>
-			MemTyles
-		</Text>
-		<Button onPress={clearBoard} title="Clear Board" />
-		<Button onPress={scrollToInstructions} title="How to Play" />
-        <View
-          style={{
-			backgroundColor : isDarkMode ? Colors.black : Colors.white,
-			flex            : 1,
-			flexDirection   : 'row',
-			flexWrap        : 'wrap',
-          }}>
-			<CardTable
-				board={board}
-				Card={Card}
-				handleTyleClick={handleTyleClick}
-				numCards={numCards}
-			/>
-			<Progress />
-			<GameClock gameTime={timeGameTook} action={timerAction}  />
-			<Text>Select Number of Tyles</Text>
-			<SelectNumCards />
-			{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
-        </View>
-		{scores.length > 0 && <ScoresTable />}
-		<View
-			  onLayout={event => {
-				const layout = event.nativeEvent.layout;
-				setInstructionsY (event?.nativeEvent?.layout?.y || 100)
-			}}
-		>
-			<Instructions />
-		</View>
-      </ScrollView>
-    </SafeAreaView>
+	return (
+		<SafeAreaView style={styles.container}>
+			<StatusBar />
+			<ScrollView
+				contentInsetAdjustmentBehavior="automatic"
+				keyboardShouldPersistTaps='handled'
+				ref={instructionsRef}
+			>
+				<Text style={styles.title}>
+					MemTyles
+				</Text>
+				<Button onPress={clearBoard} title="Clear Board" />
+				<Button onPress={scrollToInstructions} title="How to Play" />
+				<View style={styles.distributed} >
+					<CardTable
+					board={board}
+					handleTyleClick={handleTyleClick}
+					numCards={numCards}
+					/>
+				</View>
+				<Progress />
+				<GameClock gameTime={timeGameTook} action={timerAction}  />
+				<Text>Select Number of Tyles</Text>
+				<SelectNumCards />
+				{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
+				{scores.length > 0 && <ScoresTable />}
+				<View
+					onLayout={event => {
+						const layout = event.nativeEvent.layout;
+						setInstructionsY (event?.nativeEvent?.layout?.y || 100)
+					}}
+				>
+					<Instructions />
+				</View>
+			</ScrollView>
+		</SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+	container : {
+		padding       : 10,
+	},
+	title : {
+		fontSize      : 36,
+		fontWeight    : 'bold',
+	},
+	distributed : {
+		flex          : 1,
+		flexDirection : 'row',
+		flexWrap      : 'wrap',
+		alignItems    : 'center',
+	},
 });
 
 export default App;

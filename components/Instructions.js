@@ -16,14 +16,14 @@ import {startBoard, wonBoard, twoMatching, twoMisMatching, oneSelected, twoMatch
 
 export default function Instructions () {
 	return (
-		<View>
+		<View style={styles.container}>
+			<Text style={styles.header}>How to Play</Text>
 			<Text style={styles.instructionP}>
 				The board is made up of pairs of pictures, or Tyles as we call them, like this :
 			</Text>
 			<View style={styles.flexible}>
 				<CardTable
 					board={wonBoard}
-					Card={Card}
 					handleTyleClick={handleTyleClick}
 					numCards={12}
 				/>
@@ -34,7 +34,6 @@ export default function Instructions () {
 			<View style={styles.flexible}>
 				<CardTable
 					board={startBoard}
-					Card={Card}
 					handleTyleClick={handleTyleClick}
 					numCards={12}
 				/>
@@ -47,7 +46,6 @@ export default function Instructions () {
 			<View style={styles.flexible}>
 				<CardTable
 					board={twoMatching}
-					Card={Card}
 					handleTyleClick={handleTyleClick}
 					numCards={12}
 				/>
@@ -64,7 +62,6 @@ export default function Instructions () {
 			<View style={styles.flexible}>
 				<CardTable
 					board={twoMisMatching}
-					Card={Card}
 					handleTyleClick={handleTyleClick}
 					numCards={12}
 				/>
@@ -77,7 +74,6 @@ export default function Instructions () {
 			<View style={styles.flexible}>
 				<CardTable
 					board={oneSelected}
-					Card={Card}
 					handleTyleClick={handleTyleClick}
 					numCards={12}
 				/>
@@ -89,7 +85,6 @@ export default function Instructions () {
 			<View style={styles.flexible}>
 				<CardTable
 					board={twoMatchedNext}
-					Card={Card}
 					handleTyleClick={handleTyleClick}
 					numCards={12}
 				/>
@@ -101,7 +96,6 @@ export default function Instructions () {
 			<View style={styles.flexible}>
 				<CardTable
 					board={wonBoard}
-					Card={Card}
 					handleTyleClick={handleTyleClick}
 					numCards={12}
 				/>
@@ -133,7 +127,15 @@ export default function Instructions () {
 	);
 }
 const styles = StyleSheet.create({
+	container : {
+	},
 	instructionP : {
+		marginTop       : 10,
+		marginBottom    : 10,
+	},
+	header : {
+		marginTop       : 25,
+		fontSize        : 24,
 	},
 	flexible : {
 		flex            : 1,

@@ -5,8 +5,10 @@ import {
 	Text,
 	View,
 }                          from 'react-native';
-export default function CardTable ({board, Card, handleTyleClick, numCards}) {
-	console.log ("numCards : ", numCards);
+import Card from './Card';
+
+export default function CardTable ({board, handleTyleClick, numCards}) {
+	console.log ("CardTable : numCards : ", numCards);
 	return board.map (card => {
 			let width = "25%";
 			switch (parseInt (numCards)) {
