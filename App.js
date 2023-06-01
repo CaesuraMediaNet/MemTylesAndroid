@@ -40,7 +40,6 @@ import SelectDropdown from 'react-native-select-dropdown'
 //
 import Card         from './components/Card';
 import GameClock    from './components/GameClock';
-// import WonModal     from './components/WonModal';
 import MtRow        from './components/MtRow';
 import CardTable    from './components/CardTable';
 import Instructions from './components/Instructions';
@@ -193,11 +192,9 @@ const App: () => Node = () => {
 			<Text>Select Number of Tyles</Text>
 			<SelectNumCards />
 			{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
-			{/*
-			<Text>Instructions</Text>
-			*/}
         </View>
 		{scores.length > 0 && <ScoresTable />}
+		<Instructions />
       </ScrollView>
     </SafeAreaView>
   );
