@@ -39,7 +39,6 @@ import CardTable    from './components/CardTable';
 import Instructions from './components/Instructions';
 import {initBoard}  from './components/boards';
 
-
 // Local functions.
 //
 import shuffleCards from './functions/shuffleCards';
@@ -73,6 +72,19 @@ const App: () => Node = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+     function Progress () {
+        if (wonAllPlay) {
+            return (
+                <Text>You did {numCards} Tyles in {numClicks} goes and {gameTime} seconds</Text>
+            );
+        } else {
+            return (
+                <Text>Goes : {numClicks}</Text>
+            );
+        }
+    }
+
+
     function handleTyleClick (card) {
         let { won, wonAll } = flipCard (card, numClicks, setNumClicks, board, setBoard);
         if (won)    setWonPlay    (true);
@@ -81,6 +93,32 @@ const App: () => Node = () => {
             setTimerAction ((timerAction) => "stop");
         }
     }
+    // When a game is won this is called.
+    //
+    function timeGameTook ({timeS}) {
+        setGameTime ((gameTime) => timeS);
+        let thisGame = {
+            numCards  : numCards,
+            numClicks : numClicks,
+            gameTime  : timeS,
+        }
+        // let allScores = addScore (thisGame);
+        // setScores (allScores);
+    }
+    function clearBoard () {
+		console.log ("clearBoard called");
+        let shuffledCards = shuffleCards(initBoard.slice(), numCards);
+        setBoard(shuffledCards);
+        setWonPlay(false);
+        setWonAllPlay(false);
+        setNumClicks(0);
+        let now                = Date.now();
+        let action             = "reset" + now; // Keep resetting on button click, but action is still "reset".
+        if (wonAllPlay) action = "restart";
+        setTimerAction ((timerAction) => action);
+    }
+
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -91,30 +129,22 @@ const App: () => Node = () => {
 		<Text style={{fontSize : 36, fontWeight : 'bold' }}>
 			MemTyles
 		</Text>
-		<Button title="Clear Board" />
+		<Button onPress={clearBoard} title="Clear Board" />
         <View
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-			flex          : 1,
-			flexDirection : 'row',
-			 flexWrap     : 'wrap',
+			backgroundColor : isDarkMode ? Colors.black : Colors.white,
+			flex            : 1,
+			flexDirection   : 'row',
+			flexWrap        : 'wrap',
           }}>
 			<CardTable
 				board={board}
 				Card={Card}
 				handleTyleClick={handleTyleClick}
 				numCards={numCards}
-			>
-			</CardTable>
-			<Text>
-				{/*board.map ((card, index) => {
-					return (
-						<FontAwesomeIcon key={card.id} icon={ card.icon } />
-					);
-				})*/};
-			</Text>
-			<Text>Goes : </Text>
-			<Text>00:00:00</Text>
+			/>
+			<Progress />
+			<GameClock gameTime={timeGameTook} action={timerAction}  />
 			<Text>Select Number of Tyles</Text>
 			<Text>Past Scores</Text>
 			<Text>Instructions</Text>

@@ -37,9 +37,9 @@ export default function GameClock ({action, gameTime}) {
 
 	return (
 		action === "stop" ? (
-			<span>Time played : {new Date(timePlayed * 1000).toISOString().slice(11, 19)}</span>
+			<Text>Time played : {new Date(timePlayed * 1000).toISOString().slice(11, 19)}</Text>
 		) : (
-			<span>              {new Date(timePlayed * 1000).toISOString().slice(11, 19)}</span>
+			<Text>              {new Date(timePlayed * 1000).toISOString().slice(11, 19)}</Text>
 		)
 	);
 }
