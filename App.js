@@ -24,6 +24,7 @@ import {
 	Button,
 	FlatList,
 	Pressable,
+	TouchableOpacity,
 } from 'react-native';
 
 // FontAwesome.
@@ -32,6 +33,7 @@ import {
 	Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faQuestion,     } from '@fortawesome/free-solid-svg-icons';
 
 // Other community libs.
 //
@@ -67,9 +69,11 @@ const App: () => Node = () => {
     const [scores,setScores]                        = useState([]);
     const [showPrivacyLink, setShowPrivacyLink]     = useState(false);
     const [instructionsY, setInstructionsY]         = useState(100);
+	const [showInstructions, setShowInstructions]   = useState(false);
 
     const numCardsRef                               = useRef();
     const instructionsRef                           = useRef();
+    const instructionsButtonRef                     = useRef();
 
 	useEffect(() => {
 		async function getGetScores () {
@@ -93,6 +97,7 @@ const App: () => Node = () => {
         }
     }
     function handleTyleClick (card) {
+		setShowInstructions (false);
         let { won, wonAll } = flipCard (card, numClicks, setNumClicks, board, setBoard);
         if (won)    setWonPlay    (true);
         if (wonAll) {
@@ -161,6 +166,7 @@ const App: () => Node = () => {
 		);
 	}
 	function scrollToInstructions () {
+		setShowInstructions (true);
         instructionsRef.current.scrollTo({ y : instructionsY, animated : true} );
     }
 
@@ -172,11 +178,19 @@ const App: () => Node = () => {
 				keyboardShouldPersistTaps='handled'
 				ref={instructionsRef}
 			>
+				{!showInstructions && 
+					<View style={styles.help}>
+						<TouchableOpacity
+							onPress={scrollToInstructions}
+						>
+							<FontAwesomeIcon  color={'dimgray'} size={50} icon={faQuestion} />	
+						</TouchableOpacity>
+					</View>
+				}
 				<Text style={styles.title}>
 					MemTyles
 				</Text>
 				<Button onPress={clearBoard} title="Clear Board" />
-				<Button onPress={scrollToInstructions} title="How to Play" />
 				<View style={styles.distributed} >
 					<CardTable
 					board={board}
@@ -196,7 +210,7 @@ const App: () => Node = () => {
 						setInstructionsY (event?.nativeEvent?.layout?.y || 100)
 					}}
 				>
-					<Instructions />
+					{showInstructions && <Instructions />}
 				</View>
 			</ScrollView>
 		</SafeAreaView>
@@ -217,6 +231,12 @@ const styles = StyleSheet.create({
 		flexWrap      : 'wrap',
 		alignItems    : 'center',
 	},
+	help : {
+		position      : "absolute",
+		top           : 5,
+		right         : 5,
+		zIndex        : 1,
+	}
 });
 
 export default App;
