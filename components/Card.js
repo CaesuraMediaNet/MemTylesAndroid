@@ -16,29 +16,18 @@ import { faPuzzlePiece }   from '@fortawesome/free-solid-svg-icons'
 import styles              from '../styles/memtyles.module.css';
 
 export default function Card ({id, icon, width, height, clicked, flipped, won, colour, cardName}) {
-
-    // let blankStyle         = cardStyles.blankStyle;
-    // let selectedStyle      = cardStyles.selectedStyle;
-    // let wonStyle           = cardStyles.wonStyle;
-
-    // Some icons are bigger than others moving the page about.
-    //
-	/*
-    if (cardName.match (/Moon|Brush|Lemon|Bell|HourglassStart/i)) {
-        selectedStyle = cardStyles.reduceSelectedBigIconStyle;
-		wonStyle      = cardStyles.reduceWonBigIconStyle;
-    }
-	*/
     return (
-        <TouchableOpacity onPress={clicked} >
-            {flipped ?
-                <FontAwesomeIcon  color={colour} size={100} icon={icon} />
-                : won ?
-                <FontAwesomeIcon       color={colour} size={100} icon={icon} />
-                :
-                <FontAwesomeIcon     color={'dimgrey'} size={100} icon={faPuzzlePiece} />
-            }
-        </TouchableOpacity>
+		<View style={flipped ? cardStyles.selectedStyle : won ? cardStyles.wonStyle : cardStyles.iconStyle}>
+			<TouchableOpacity onPress={clicked} >
+				{flipped ?
+					<FontAwesomeIcon  color={colour}    size={75} icon={icon} />
+					: won ?
+					<FontAwesomeIcon  color={colour}    size={75} icon={icon} />
+					:
+					<FontAwesomeIcon  color={'dimgrey'} size={75} icon={faPuzzlePiece} />
+				}
+			</TouchableOpacity>
+		</View>
     );
 }
 
@@ -49,40 +38,15 @@ const cardStyles = StyleSheet.create({
         height  : 100,
         width   : 100,
     },
-	blankStyle : {
-        color   : 'dimgray',
-        padding : 5,
-        height  : 100,
-        width   : 100,
-	},
 	selectedStyle : {
-        color   : 'dimgray',
-        padding : 5,
-        height  : 100,
-        width   : 100,
-		border  : '1px solid green',
-		borderRadius : '0.2rem',
+        padding      : 5,
+		borderWidth  : 2,
+		borderRadius : 4,
+		borderColor  : 'green',
 	},
 	wonStyle : {
         color   : 'dimgray',
         padding : 5,
-        height  : 100,
-        width   : 100,
 		opacity : 0.6,
 	},
-	reduceSelectedBigIconStyle : {
-        color   : 'dimgray',
-        padding : 5,
-        height  : 100,
-        width   : 75,
-		border  : '1px solid green',
-		borderRadius : '0.2rem',
-	},
-	reduceWonBigIconStyle : {
-        color   : 'dimgray',
-        padding : 5,
-        height  : 100,
-        width   : 75,
-		opacity : 0.6,
-	}
 });
