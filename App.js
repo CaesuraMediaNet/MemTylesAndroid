@@ -74,7 +74,6 @@ const App: () => Node = () => {
     const [timerAction,setTimerAction]              = useState("start");
     const [scores,setScores]                        = useState([]);
     const [showPrivacyLink, setShowPrivacyLink]     = useState(false);
-    const [instructionsY, setInstructionsY]         = useState(100);
 	const [showInstructions, setShowInstructions]   = useState(false);
 
     const numCardsRef                               = useRef();
@@ -138,10 +137,6 @@ const App: () => Node = () => {
 			/>
 		);
 	}
-	function scrollToInstructions () {
-		setShowInstructions (true);
-        // instructionsRef.current.scrollTo({ y : instructionsY, animated : true} );
-    }
 	function GameBoard () {
 		return (
 			<>
@@ -174,7 +169,7 @@ const App: () => Node = () => {
 				{!showInstructions && 
 					<View style={styles.help}>
 						<TouchableOpacity
-							onPress={scrollToInstructions}
+							onPress={() => setShowInstructions (true)}
 						>
 							<FontAwesomeIcon  color={'dimgray'} size={50} icon={faQuestion} />	
 						</TouchableOpacity>
@@ -184,14 +179,7 @@ const App: () => Node = () => {
 					MemTyles
 				</Text>
 				{!showInstructions && <GameBoard />}
-				<View
-					onLayout={event => {
-						const layout = event.nativeEvent.layout;
-						setInstructionsY (event?.nativeEvent?.layout?.y || 100)
-					}}
-				>
-					{showInstructions && <Instructions setShowInstructions={setShowInstructions}/>}
-				</View>
+				{showInstructions && <Instructions setShowInstructions={setShowInstructions}/>}
 			</ScrollView>
 		</SafeAreaView>
   );
