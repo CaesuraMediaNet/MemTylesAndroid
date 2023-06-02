@@ -79,6 +79,18 @@ const App: () => Node = () => {
     const numCardsRef                               = useRef();
     const instructionsRef                           = useRef();
     const instructionsButtonRef                     = useRef();
+		/*
+		console.log ("board", board);
+		console.log ("wonPlay", wonPlay);
+		console.log ("wonAllPlay", wonAllPlay)
+		console.log ("numCards", numCards);
+		console.log ("numClicks", numClicks)
+		console.log ("gameTime", gameTime);
+		console.log ("timerAction", timerAction);
+		console.log ("scores", scores);
+		console.log ("showPrivacyLink", showPrivacyLink)
+		console.log ("showInstructions", showInstructions);
+		*/
 
 	useEffect(() => {
 		async function getGetScores () {
@@ -88,6 +100,18 @@ const App: () => Node = () => {
         let shuffledBoard   = shuffleCards(initBoard.slice(), numCards);
         setBoard (shuffledBoard);
 		getGetScores ();
+		/*
+		console.log ("board", board);
+		console.log ("wonPlay", wonPlay);
+		console.log ("wonAllPlay", wonAllPlay)
+		console.log ("numCards", numCards);
+		console.log ("numClicks", numClicks)
+		console.log ("gameTime", gameTime);
+		console.log ("timerAction", timerAction);
+		console.log ("scores", scores);
+		console.log ("showPrivacyLink", showPrivacyLink)
+		console.log ("showInstructions", showInstructions);
+		*/
 	}, [numCards])
 
     function handleTyleClick (card) {
@@ -137,27 +161,6 @@ const App: () => Node = () => {
 			/>
 		);
 	}
-	function GameBoard () {
-		return (
-			<>
-			<Button onPress={clearBoard} title="Clear Board" />
-			<View style={styles.distributed} >
-				<CardTable
-					board={board}
-					handleTyleClick={handleTyleClick}
-					numCards={numCards}
-				/>
-			</View>
-			<Progress wonAllPlay={wonAllPlay} numCards={numCards} numClicks={numClicks} gameTime={gameTime} />
-			<GameClock gameTime={timeGameTook} action={timerAction}  />
-			<Text>Select Number of Tyles</Text>
-			<SelectNumCards />
-			{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
-			{scores.length > 0 && <ScoresTable scores={scores} />}
-			</>
-		);
-	}
-
 	return (
 		<SafeAreaView style={styles.container}>
 			<StatusBar />
@@ -178,7 +181,24 @@ const App: () => Node = () => {
 				<Text style={styles.title}>
 					MemTyles
 				</Text>
-				{!showInstructions && <GameBoard />}
+				{!showInstructions && 
+					<>
+					<Button onPress={clearBoard} title="Clear Board" />
+					<View style={styles.distributed} >
+						<CardTable
+							board={board}
+							handleTyleClick={handleTyleClick}
+							numCards={numCards}
+						/>
+					</View>
+					<Progress wonAllPlay={wonAllPlay} numCards={numCards} numClicks={numClicks} gameTime={gameTime} />
+					<GameClock gameTime={timeGameTook} action={timerAction}  />
+					<Text>Select Number of Tyles</Text>
+					<SelectNumCards />
+					{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
+					{scores.length > 0 && <ScoresTable scores={scores} />}
+					</>
+				}
 				{showInstructions && <Instructions setShowInstructions={setShowInstructions}/>}
 			</ScrollView>
 		</SafeAreaView>
