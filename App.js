@@ -44,16 +44,22 @@ import SelectDropdown from 'react-native-select-dropdown'
 import Card         from './components/Card';
 import GameClock    from './components/GameClock';
 import MtRow        from './components/MtRow';
+import Progress     from './components/Progress';
 import CardTable    from './components/CardTable';
 import Instructions from './components/Instructions';
 import WonModal     from './components/WonModal';
+import ScoresTable  from './components/ScoresTable';
 import {initBoard}  from './components/boards';
 
 // Local functions.
 //
-import shuffleCards from './functions/shuffleCards';
-import flipCard from './functions/flipCard';
-import {addScore, getScores, clearScores} from './functions/scores';
+import shuffleCards    from './functions/shuffleCards';
+import flipCard        from './functions/flipCard';
+import {
+	addScore,
+	getScores,
+	clearScores
+}                      from './functions/scores';
 
 
 // The MemTyles App.
@@ -85,17 +91,6 @@ const App: () => Node = () => {
 		getGetScores ();
 	}, [numCards])
 
-	function Progress () {
-		if (wonAllPlay) {
-            return (
-                <Text>You did {numCards} Tyles in {numClicks} goes and {gameTime} seconds</Text>
-            );
-        } else {
-            return (
-                <Text>Goes : {numClicks}</Text>
-            );
-        }
-    }
     function handleTyleClick (card) {
 		setShowInstructions (false);
         let { won, wonAll } = flipCard (card, numClicks, setNumClicks, board, setBoard);
@@ -128,6 +123,7 @@ const App: () => Node = () => {
         let action             = "reset" + now; // Keep resetting on button click, but action is still "reset".
         if (wonAllPlay) action = "restart";
         setTimerAction ((timerAction) => action);
+		setShowInstructions (false);
     }
 	function changeNumCards (selectedItem) {
 		console.log ("changeNumCards : ", selectedItem);
@@ -142,33 +138,30 @@ const App: () => Node = () => {
 			/>
 		);
 	}
-	function ScoreItem ({gameTime, numCards, numClicks}) {
-		return (
-			<View>
-				<Text>{numCards} cards in {numClicks} clicks and {gameTime} seconds</Text>
-			</View>
-		);
-	}
-	function ScoresTable () {
-		return (
-			<View>
-				{scores.map((score, index) => {
-					return (
-						<ScoreItem
-							key={index}
-							gameTime={score.gameTime}
-							numCards={score.numCards}
-							numClicks={score.numClicks}
-						/>
-					);
-				})}
-			</View>
-		);
-	}
 	function scrollToInstructions () {
 		setShowInstructions (true);
         instructionsRef.current.scrollTo({ y : instructionsY, animated : true} );
     }
+	function GameBoard () {
+		return (
+			<>
+			<Button onPress={clearBoard} title="Clear Board" />
+			<View style={styles.distributed} >
+				<CardTable
+					board={board}
+					handleTyleClick={handleTyleClick}
+					numCards={numCards}
+				/>
+			</View>
+			<Progress wonAllPlay={wonAllPlay} numCards={numCards} numClicks={numClicks} gameTime={gameTime} />
+			<GameClock gameTime={timeGameTook} action={timerAction}  />
+			<Text>Select Number of Tyles</Text>
+			<SelectNumCards />
+			{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
+			{scores.length > 0 && <ScoresTable scores={scores} />}
+			</>
+		);
+	}
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -190,20 +183,7 @@ const App: () => Node = () => {
 				<Text style={styles.title}>
 					MemTyles
 				</Text>
-				<Button onPress={clearBoard} title="Clear Board" />
-				<View style={styles.distributed} >
-					<CardTable
-					board={board}
-					handleTyleClick={handleTyleClick}
-					numCards={numCards}
-					/>
-				</View>
-				<Progress />
-				<GameClock gameTime={timeGameTook} action={timerAction}  />
-				<Text>Select Number of Tyles</Text>
-				<SelectNumCards />
-				{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
-				{scores.length > 0 && <ScoresTable />}
+				{!showInstructions && <GameBoard />}
 				<View
 					onLayout={event => {
 						const layout = event.nativeEvent.layout;
