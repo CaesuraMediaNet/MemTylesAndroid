@@ -140,7 +140,7 @@ const App: () => Node = () => {
 	}
 	function scrollToInstructions () {
 		setShowInstructions (true);
-        instructionsRef.current.scrollTo({ y : instructionsY, animated : true} );
+        // instructionsRef.current.scrollTo({ y : instructionsY, animated : true} );
     }
 	function GameBoard () {
 		return (
@@ -190,7 +190,7 @@ const App: () => Node = () => {
 						setInstructionsY (event?.nativeEvent?.layout?.y || 100)
 					}}
 				>
-					{showInstructions && <Instructions />}
+					{showInstructions && <Instructions setShowInstructions={setShowInstructions}/>}
 				</View>
 			</ScrollView>
 		</SafeAreaView>
