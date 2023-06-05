@@ -1,10 +1,23 @@
 // The comprehensive instructions which show example boards and a video.
 //
 import React from 'react';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import CardTable from './CardTable';
 import Card from './Card';
-import { Text, View, Button, StyleSheet, FlatList, TouchableOpacity, } from 'react-native';
+import {
+	Text,
+	View,
+	Button,
+	StyleSheet,
+	TouchableOpacity,
+	BackHandler,
+}                                 from 'react-native';
+import { FontAwesomeIcon }        from '@fortawesome/react-native-fontawesome';
+import {
+	faQuestion,
+	faAnglesRight,
+	faAnglesLeft
+}                                 from '@fortawesome/free-solid-svg-icons';
 
 function handleTyleClick () {
 	return null;
@@ -14,39 +27,39 @@ function onDemoButton () {
 }
 import {startBoard, wonBoard, twoMatching, twoMisMatching, oneSelected, twoMatchedNext} from '../components/boards';
 
-function NextPage ({setPageNumber}) {
+function Navigate ({pageNumber, setPageNumber}) {
 	return (
-		<TouchableOpacity
-			onPress={() => setPageNumber (pageNumber => pageNumber + 1)}
-		>
-			<Text>Next Page</Text>
-		</TouchableOpacity>
+		<View style={styles.greenBox}>
+			<View style={styles.spaceEvenly}>
+				{pageNumber > 1 && 
+				<TouchableOpacity style={{fontSize : 24}} onPress={() => setPageNumber (pageNumber => pageNumber - 1)}>
+					<Text>Previous</Text>
+					<FontAwesomeIcon color={'dimgray'} size={35} icon={faAnglesLeft} />
+				</TouchableOpacity>
+				}
+				{pageNumber < 6 &&
+				<TouchableOpacity style={{fontSize : 24}} onPress={() => setPageNumber (pageNumber => pageNumber + 1)}>
+					<Text>Next</Text>
+					<FontAwesomeIcon color={'dimgray'} size={35} icon={faAnglesRight} />
+				</TouchableOpacity>
+				}
+			</View>
+		</View>
 	);
 }
-function PrevPage ({setPageNumber}) {
-		return (
-			<TouchableOpacity
-				onPress={() => setPageNumber (pageNumber => pageNumber - 1)}
-			>
-				 <Text>Prev Page</Text>
-			</TouchableOpacity>
-		);
-}
-function Nav ({pageNumber, setPageNumber}) {
+function Header ({pageNumber}) {
 	return (
-		<View>
-			{pageNumber > 1 && <PrevPage setPageNumber={setPageNumber} />}
-			{pageNumber < 6 && <NextPage setPageNumber={setPageNumber} />}
+		<View style={styles.greenBox}>
+			<Text>Page {pageNumber}</Text>
 		</View>
 	);
 }
 
 function Pages ({pageNumber, setPageNumber}) {
-	console.log ("pageNumber is ", pageNumber);
 	if (pageNumber === 1) {
 		return (
 			<>
-			<Text>Page 1</Text>
+			<Header pageNumber={pageNumber} />
 			<Text style={styles.instructionP}>
 				The board is made up of pairs of pictures, or Tyles as we call them, like this :
 			</Text>
@@ -57,13 +70,13 @@ function Pages ({pageNumber, setPageNumber}) {
 					numCards={12}
 				/>
 			</View>
-			<Nav pageNumber={pageNumber} setPageNumber={setPageNumber} />
+			<Navigate pageNumber={pageNumber} setPageNumber={setPageNumber} />
 			</>
 		);
 	} else if  (pageNumber === 2) {
 		return (
 			<>
-			<Text>Page 2</Text>
+			<Header pageNumber={pageNumber} />
 			<Text style={styles.instructionP}>
                 At the start of the game the board has all Tyles turned over, showing the jigsaw image :
             </Text>
@@ -74,13 +87,13 @@ function Pages ({pageNumber, setPageNumber}) {
                     numCards={12}
                 />
             </View>
-			<Nav pageNumber={pageNumber} setPageNumber={setPageNumber} />
+			<Navigate pageNumber={pageNumber} setPageNumber={setPageNumber} />
 			</>
 		);
 	} else if  (pageNumber === 3) {
 		return (
 			<>
-			<Text>Page 3</Text>
+			<Header pageNumber={pageNumber} />
             <Text style={styles.instructionP}>
                 The game is to turn over pairs of Tyles, by clicking on the
                 Jigsaw pictures, to find the matching ones, like this :
@@ -92,13 +105,13 @@ function Pages ({pageNumber, setPageNumber}) {
                     numCards={12}
                 />
             </View>
-			<Nav pageNumber={pageNumber} setPageNumber={setPageNumber} />
+			<Navigate pageNumber={pageNumber} setPageNumber={setPageNumber} />
 			</>
 		);
 	} else if  (pageNumber === 4) {
 		return (
 			<>
-			<Text>Page 4</Text>
+			<Header pageNumber={pageNumber} />
             <Text style={styles.instructionP}>
                 Only two Tyles can be turned over at any one time, clicking on any more will
                 not do anything.
@@ -124,13 +137,13 @@ function Pages ({pageNumber, setPageNumber}) {
                     numCards={12}
                 />
             </View>
-			<Nav pageNumber={pageNumber} setPageNumber={setPageNumber} />
+			<Navigate pageNumber={pageNumber} setPageNumber={setPageNumber} />
 			</>
 		);
 	} else if  (pageNumber === 5) {
 		return (
 			<>
-			<Text>Page 5</Text>
+			<Header pageNumber={pageNumber} />
             <Text style={styles.instructionP}>
                 When all Tyles are matched, you have won the game!
             </Text>
@@ -152,13 +165,13 @@ function Pages ({pageNumber, setPageNumber}) {
                 You can restart the game using the Clear Board button at the top :
             </Text>
             <Button onPress={onDemoButton} title="Clear Board" />
-			<Nav pageNumber={pageNumber} setPageNumber={setPageNumber} />
+			<Navigate pageNumber={pageNumber} setPageNumber={setPageNumber} />
 			</>
 		);
 	} else if  (pageNumber === 6) {
 		return (
 			<>
-			<Text>Page 6</Text>
+			<Header pageNumber={pageNumber} />
             <Text style={styles.instructionP}>
                 Your scores are in the Past Scores section.  They are saved in Cookies, so no scores are
                 recorded by us.
@@ -169,7 +182,7 @@ function Pages ({pageNumber, setPageNumber}) {
             <Text style={styles.instructionP}>
                 Here is a video showing a game being played.
             </Text>
-			<Nav pageNumber={pageNumber} setPageNumber={setPageNumber} />
+			<Navigate pageNumber={pageNumber} setPageNumber={setPageNumber} />
 			</>
 		);
 	} else {
@@ -179,6 +192,34 @@ function Pages ({pageNumber, setPageNumber}) {
 
 export default function Instructions ({setShowInstructions}) {
 	const [pageNumber, setPageNumber] = useState (1);
+
+	// https://reactnative.dev/docs/backhandler
+	//
+	useEffect(() => {
+		const backAction = () => {
+
+			// Back to the game.
+			//
+			if (pageNumber === 1) {
+
+				setShowInstructions (false);
+
+			// Back a Nav page.
+			//
+			} else if (pageNumber > 1) {
+				setPageNumber (setPageNumber => setPageNumber - 1);
+			}
+			return true;
+		};
+		const backHandler = BackHandler.addEventListener(
+			'hardwareBackPress',
+			backAction,
+		);
+		return () => backHandler.remove();
+	},[]);
+
+	// Help Pages.
+	//
 	return (
 		<View style={styles.container}>
 			<Button title="Play the Game!" onPress={() => setShowInstructions(false)} />
@@ -310,7 +351,17 @@ const styles = StyleSheet.create({
 		flexDirection   : 'row',
 		flexWrap        : 'wrap',
 	},
+    spaceEvenly : {
+        flexDirection  : "row",
+        justifyContent : "space-evenly",
+        alignItems     : 'center',
+    },
+    greenBox : {
+        marginTop      : 7,
+        marginBottom   : 7,
+        padding        : 5,
+        borderWidth    : 1,
+        borderRadius   : 4,
+        borderColor    : 'green',
+    },
 });
-
-
-
