@@ -191,8 +191,15 @@ const App: () => Node = () => {
 							numCards={numCards}
 						/>
 					</View>
-					<Progress wonAllPlay={wonAllPlay} numCards={numCards} numClicks={numClicks} gameTime={gameTime} />
-					<GameClock gameTime={timeGameTook} action={timerAction}  />
+					<View style={{flexDirection : "row", justifyContent : "space-evenly"}}>
+						<Progress
+							wonAllPlay={wonAllPlay}
+							numCards={numCards}
+							numClicks={numClicks}
+							gameTime={gameTime}
+						/>
+						<GameClock gameTime={timeGameTook} action={timerAction}  />
+					</View>
 					<Text>Select Number of Tyles</Text>
 					<SelectNumCards />
 					{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
