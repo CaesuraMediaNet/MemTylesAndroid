@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Button} from 'react-native';
 
 function ScoreItem ({gameTime, numCards, numClicks}) {
 	return (
@@ -8,7 +8,7 @@ function ScoreItem ({gameTime, numCards, numClicks}) {
 		</View>
 	);
 }
-export default function ScoresTable ({scores}) {
+export default function ScoresTable ({scores, clearScores}) {
 	return (
 		<View>
 			{scores.map((score, index) => {
@@ -21,6 +21,7 @@ export default function ScoresTable ({scores}) {
 					/>
 				);
 			})}
+			<Button onPress={clearScores} title="Clear Scores" />
 		</View>
 	);
 }

@@ -34,19 +34,20 @@ export default function Card ({id, icon, width, height, clicked, flipped, won, c
 const cardStyles = StyleSheet.create({
     iconStyle : {
         color   : 'dimgray',
-        padding : 5,
-        height  : 100,
-        width   : 100,
+        padding : 7,
+		alignItems   : 'center',
     },
 	selectedStyle : {
         padding      : 5,
 		borderWidth  : 2,
 		borderRadius : 4,
 		borderColor  : 'green',
+		alignItems   : 'center',
 	},
 	wonStyle : {
         color   : 'dimgray',
-        padding : 5,
+        padding : 7,
 		opacity : 0.6,
+		alignItems   : 'center',
 	},
 });

@@ -33,7 +33,7 @@ import {
 	Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faQuestion,     } from '@fortawesome/free-solid-svg-icons';
+import { faQuestion, faPlus, faMinus     } from '@fortawesome/free-solid-svg-icons';
 
 // Other community libs.
 //
@@ -153,13 +153,78 @@ const App: () => Node = () => {
         setNumCards  (selectedItem);
         clearBoard ();
     }
+	function increaseNumCards () {
+		switch (numCards) {
+			case 4  : 
+				setNumCards  (12);
+			break;
+			case 12 : 
+				setNumCards  (16);
+			break;
+			case 16 : 
+				setNumCards  (20);
+			break;
+			case 20 : 
+				setNumCards  (36);
+			break;
+			case 36 : 
+				setNumCards  (42);
+			break;
+			case 42 : 
+				setNumCards  (56);
+			break;
+			case 56 : 
+			break;
+			default : null;
+		}
+        clearBoard ();
+	}
+	function decreaseNumCards () {
+		switch (numCards) {
+			case 4  : 
+				null;
+			break;
+			case 12 : 
+				setNumCards  (4);
+			break;
+			case 16 : 
+				setNumCards  (12);
+			break;
+			case 20 : 
+				setNumCards  (16);
+			break;
+			case 36 : 
+				setNumCards  (20);
+			break;
+			case 42 : 
+				setNumCards  (36);
+			break;
+			case 56 : 
+				setNumCards  (42);
+			break;
+			default : null;
+		}
+        clearBoard ();
+	}
 	function SelectNumCards () {
 		return (
-			<SelectDropdown
-				data={[4, 12, 16, 20, 36, 42, 56]}
-				onSelect={(selectedItem, index) => {changeNumCards(selectedItem) }}
-			/>
+			<>
+			<Text>Select Number of Tyles</Text>
+			<View style={styles.spaceEvenly}>
+				<Text style={{fontSize : 24}} onPress={decreaseNumCards}>
+					<FontAwesomeIcon color={'dimgray'} size={50} icon={faMinus} />	
+				</Text>
+				<Text style={{fontSize : 24}}>{numCards}</Text>
+				<Text style={{fontSize : 24}} onPress={increaseNumCards}>
+					<FontAwesomeIcon color={'dimgray'} size={50} icon={faPlus} />	
+				</Text>
+			</View>
+			</>
 		);
+	}
+	function clearAllScores () {
+		clearScores();
+		setScores ([]);
 	}
 	return (
 		<SafeAreaView style={styles.container}>
@@ -191,7 +256,7 @@ const App: () => Node = () => {
 							numCards={numCards}
 						/>
 					</View>
-					<View style={{flexDirection : "row", justifyContent : "space-evenly"}}>
+					<View style={!wonAllPlay && styles.spaceEvenly}>
 						<Progress
 							wonAllPlay={wonAllPlay}
 							numCards={numCards}
@@ -200,10 +265,9 @@ const App: () => Node = () => {
 						/>
 						<GameClock gameTime={timeGameTook} action={timerAction}  />
 					</View>
-					<Text>Select Number of Tyles</Text>
 					<SelectNumCards />
 					{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
-					{scores.length > 0 && <ScoresTable scores={scores} />}
+					{scores.length > 0 && <ScoresTable scores={scores} clearScores={clearAllScores} />}
 					</>
 				}
 				{showInstructions && <Instructions setShowInstructions={setShowInstructions}/>}
@@ -214,24 +278,28 @@ const App: () => Node = () => {
 
 const styles = StyleSheet.create({
 	container : {
-		padding       : 10,
+		padding        : 10,
 	},
 	title : {
-		fontSize      : 36,
-		fontWeight    : 'bold',
+		fontSize       : 36,
+		fontWeight     : 'bold',
 	},
 	distributed : {
-		flex          : 1,
-		flexDirection : 'row',
-		flexWrap      : 'wrap',
-		alignItems    : 'center',
+		flex           : 1,
+		flexDirection  : 'row',
+		flexWrap       : 'wrap',
+		alignItems     : 'center',
 	},
 	help : {
-		position      : "absolute",
-		top           : 5,
-		right         : 5,
-		zIndex        : 1,
-	}
+		position       : "absolute",
+		top            : 5,
+		right          : 5,
+		zIndex         : 1,
+	},
+	spaceEvenly : {
+		flexDirection  : "row",
+		justifyContent : "space-evenly",
+	},
 });
 
 export default App;
