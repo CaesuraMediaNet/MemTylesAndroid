@@ -196,27 +196,29 @@ export default function Instructions ({setShowInstructions}) {
 	// https://reactnative.dev/docs/backhandler
 	//
 	useEffect(() => {
-		const backAction = () => {
+		const backAction = (pageNumber) => {
 
 			// Back to the game.
 			//
 			if (pageNumber === 1) {
 
+				console.log ("pageNumber :", pageNumber);
 				setShowInstructions (false);
 
 			// Back a Nav page.
 			//
 			} else if (pageNumber > 1) {
+				console.log ("pageNumber :", pageNumber);
 				setPageNumber (setPageNumber => setPageNumber - 1);
 			}
 			return true;
 		};
 		const backHandler = BackHandler.addEventListener(
 			'hardwareBackPress',
-			backAction,
+			() => backAction (pageNumber),
 		);
 		return () => backHandler.remove();
-	},[]);
+	},[pageNumber]);
 
 	// Help Pages.
 	//
