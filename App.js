@@ -208,18 +208,18 @@ const App: () => Node = () => {
 	}
 	function SelectNumCards () {
 		return (
-			<View style={{padding: 5, borderWidth: 1, borderRadius : 4, borderColor  : 'green' }}>
+			<View style={styles.greenBox}>
 				<View style={{alignItems : 'center'}}>
 					<Text style={{fontSize : 18, marginTop : 7}} >Select Number of Tyles</Text>
 				</View>
 				<View style={styles.spaceEvenly}>
-					<Text style={{fontSize : 24}} onPress={decreaseNumCards}>
-						<FontAwesomeIcon color={'dimgray'} size={50} icon={faMinus} />	
-					</Text>
+					<TouchableOpacity style={{fontSize : 24}} onPress={decreaseNumCards}>
+						<FontAwesomeIcon color={'dimgray'} size={35} icon={faMinus} />	
+					</TouchableOpacity>
 					<Text style={{fontSize : 24}}>{numCards}</Text>
-					<Text style={{fontSize : 24}} onPress={increaseNumCards}>
-						<FontAwesomeIcon color={'dimgray'} size={50} icon={faPlus} />	
-					</Text>
+					<TouchableOpacity style={{fontSize : 24}} onPress={increaseNumCards}>
+						<FontAwesomeIcon color={'dimgray'} size={35} icon={faPlus} />	
+					</TouchableOpacity>
 				</View>
 			</View>
 		);
@@ -241,13 +241,15 @@ const App: () => Node = () => {
 						<TouchableOpacity
 							onPress={() => setShowInstructions (true)}
 						>
-							<FontAwesomeIcon  color={'dimgray'} size={50} icon={faQuestion} />	
+							<FontAwesomeIcon  color={'dimgray'} size={35} icon={faQuestion} />	
 						</TouchableOpacity>
 					</View>
 				}
-				<Text style={styles.title}>
-					MemTyles
-				</Text>
+				<View style={{alignItems : 'center'}}>
+					<Text style={styles.title}>
+						MemTyles
+					</Text>
+				</View>
 				{!showInstructions && 
 					<>
 					<Button onPress={clearBoard} title="Clear Board" />
@@ -258,18 +260,27 @@ const App: () => Node = () => {
 							numCards={numCards}
 						/>
 					</View>
-					<View style={!wonAllPlay && styles.spaceEvenly}>
-						<Progress
-							wonAllPlay={wonAllPlay}
-							numCards={numCards}
-							numClicks={numClicks}
-							gameTime={gameTime}
-						/>
-						<GameClock gameTime={timeGameTook} action={timerAction}  />
+					<View style={styles.greenBox}>
+						<View style={!wonAllPlay && styles.spaceEvenly}>
+							<Progress
+								wonAllPlay={wonAllPlay}
+								numCards={numCards}
+								numClicks={numClicks}
+								gameTime={gameTime}
+							/>
+							<GameClock gameTime={timeGameTook} action={timerAction}  />
+						</View>
 					</View>
 					<SelectNumCards />
 					{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
-					{scores.length > 0 && <ScoresTable scores={scores} clearScores={clearAllScores} />}
+					{scores.length > 0 &&
+						<View style={styles.greenBox}>
+							<View style={{alignItems : 'center'}}>
+								<Text style={{fontSize : 18, marginTop : 7}} >Scores</Text>
+								<ScoresTable scores={scores} clearScores={clearAllScores} />
+							</View>
+						</View>
+					}
 					</>
 				}
 				{showInstructions && <Instructions setShowInstructions={setShowInstructions}/>}
@@ -287,22 +298,35 @@ const styles = StyleSheet.create({
 		fontWeight     : 'bold',
 	},
 	distributed : {
+		padding        : 5,
 		marginTop      : 7,
 		marginBottom   : 7,
 		flex           : 1,
 		flexDirection  : 'row',
 		flexWrap       : 'wrap',
 		alignItems     : 'center',
+		borderWidth    : 1,
+		borderRadius   : 4,
+		borderColor    : 'green',
 	},
 	help : {
 		position       : "absolute",
-		top            : 5,
-		right          : 5,
+		top            : 0,
+		right          : 0,
 		zIndex         : 1,
 	},
 	spaceEvenly : {
 		flexDirection  : "row",
 		justifyContent : "space-evenly",
+		alignItems     : 'center',
+	},
+	greenBox : {
+		marginTop      : 7,
+		marginBottom   : 7,
+		padding        : 5,
+		borderWidth    : 1,
+		borderRadius   : 4,
+		borderColor    : 'green',
 	},
 });
 

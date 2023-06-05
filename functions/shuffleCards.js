@@ -37,9 +37,35 @@ const colours = [
     "#FC600A",
 ];
 
+export function randomise (cards) {
+
+  let currentIndex = cards.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [cards[currentIndex], cards[randomIndex]] = [cards[randomIndex], cards[currentIndex]];
+  }
+  // Ids in order. A for (let i ...) loop setting cards[i].id = i does not work.
+  // https://stackoverflow.com/questions/39827087/add-key-value-pair-to-all-objects-in-array
+  //
+  let indexedCards = cards.map((card, index) => ({...card, id : index}));
+
+  return indexedCards;
+}
+
 export default function shuffleCards (cards, numCards) {
 
-  let selectedCards = cards.slice (0, parseInt (numCards / 2));
+  // First randomise all known cards, then pick numCards, double them up and randomise them
+  // again. So we don't get the same cards each time for each numCards set.
+  //
+  let randomisedCards = randomise (cards);
+  let selectedCards   = randomisedCards.slice (0, parseInt (numCards / 2));
 
   // Add a random colour to the first list.
   //
@@ -50,22 +76,7 @@ export default function shuffleCards (cards, numCards) {
   });
   selectedCards     = selectedCards.map((card, index) => ({...card, colour : randomColours[index]}));
   let doubledUp     = [...selectedCards, ...selectedCards];
-  let currentIndex = doubledUp.length,  randomIndex;
+  let doubledUpR    = randomise (doubledUp);
 
-  // While there remain elements to shuffle.
-  while (currentIndex != 0) {
-
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [doubledUp[currentIndex], doubledUp[randomIndex]] = [doubledUp[randomIndex], doubledUp[currentIndex]];
-  }
-  // Ids in order. A for (let i ...) loop setting doubledUp[i].id = i does not work.
-  // https://stackoverflow.com/questions/39827087/add-key-value-pair-to-all-objects-in-array
-  //
-  let indexedCards = doubledUp.map((card, index) => ({...card, id : index}));
-
-  return indexedCards;
+  return doubledUpR;
 }

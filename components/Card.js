@@ -20,11 +20,11 @@ export default function Card ({id, icon, width, height, clicked, flipped, won, c
 		<View style={flipped ? cardStyles.selectedStyle : won ? cardStyles.wonStyle : cardStyles.iconStyle}>
 			<TouchableOpacity onPress={clicked} >
 				{flipped ?
-					<FontAwesomeIcon  color={colour}    size={75} icon={icon} />
+					<FontAwesomeIcon  color={colour}    size={width} icon={icon} />
 					: won ?
-					<FontAwesomeIcon  color={colour}    size={75} icon={icon} />
+					<FontAwesomeIcon  color={colour}    size={width} icon={icon} />
 					:
-					<FontAwesomeIcon  color={'dimgrey'} size={75} icon={faPuzzlePiece} />
+					<FontAwesomeIcon  color={'dimgrey'} size={width} icon={faPuzzlePiece} />
 				}
 			</TouchableOpacity>
 		</View>
