@@ -208,18 +208,20 @@ const App: () => Node = () => {
 	}
 	function SelectNumCards () {
 		return (
-			<>
-			<Text>Select Number of Tyles</Text>
-			<View style={styles.spaceEvenly}>
-				<Text style={{fontSize : 24}} onPress={decreaseNumCards}>
-					<FontAwesomeIcon color={'dimgray'} size={50} icon={faMinus} />	
-				</Text>
-				<Text style={{fontSize : 24}}>{numCards}</Text>
-				<Text style={{fontSize : 24}} onPress={increaseNumCards}>
-					<FontAwesomeIcon color={'dimgray'} size={50} icon={faPlus} />	
-				</Text>
+			<View style={{padding: 5, borderWidth: 1, borderRadius : 4, borderColor  : 'green' }}>
+				<View style={{alignItems : 'center'}}>
+					<Text style={{fontSize : 18, marginTop : 7}} >Select Number of Tyles</Text>
+				</View>
+				<View style={styles.spaceEvenly}>
+					<Text style={{fontSize : 24}} onPress={decreaseNumCards}>
+						<FontAwesomeIcon color={'dimgray'} size={50} icon={faMinus} />	
+					</Text>
+					<Text style={{fontSize : 24}}>{numCards}</Text>
+					<Text style={{fontSize : 24}} onPress={increaseNumCards}>
+						<FontAwesomeIcon color={'dimgray'} size={50} icon={faPlus} />	
+					</Text>
+				</View>
 			</View>
-			</>
 		);
 	}
 	function clearAllScores () {
@@ -285,6 +287,8 @@ const styles = StyleSheet.create({
 		fontWeight     : 'bold',
 	},
 	distributed : {
+		marginTop      : 7,
+		marginBottom   : 7,
 		flex           : 1,
 		flexDirection  : 'row',
 		flexWrap       : 'wrap',
