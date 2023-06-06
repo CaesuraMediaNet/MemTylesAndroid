@@ -59,12 +59,16 @@ export function randomise (cards) {
   return indexedCards;
 }
 
-export default function shuffleCards (cards, numCards) {
+export default function shuffleCards (cards, numCards, noShuffleTwice) {
 
   // First randomise all known cards, then pick numCards, double them up and randomise them
   // again. So we don't get the same cards each time for each numCards set.
+  // Except where we want a defined st of Tyles for the Instructions.
   //
-  let randomisedCards = randomise (cards);
+  let randomisedCards = cards;
+  if (!noShuffleTwice) {
+	  randomisedCards = randomise (cards);
+  }
   let selectedCards   = randomisedCards.slice (0, parseInt (numCards / 2));
 
   // Add a random colour to the first list.

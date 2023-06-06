@@ -34,6 +34,11 @@ export default styles = StyleSheet.create({
         justifyContent    : "space-evenly",
         alignItems        : 'center',
     },
+    spaceBetween          : {
+        flexDirection     : "row",
+        justifyContent    : "space-between",
+        alignItems        : 'center',
+    },
     greenBox              : {
         marginTop         : 7,
         marginBottom      : 7,

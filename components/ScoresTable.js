@@ -2,7 +2,7 @@ import React   from 'react';
 import {
 	View,
 	Text,
-	Pressable,
+	TouchableOpacity,
 }              from 'react-native';
 import styles  from '../styles';
 
@@ -26,9 +26,9 @@ export default function ScoresTable ({scores, clearScores}) {
 					/>
 				);
 			})}
-			<Pressable onPress={clearScores} style={styles.button}>
+			<TouchableOpacity onPress={clearScores} style={styles.button}>
 				<Text style={styles.buttonText}>Clear Scores</Text>
-			</Pressable>
+			</TouchableOpacity>
 		</View>
 	);
 }

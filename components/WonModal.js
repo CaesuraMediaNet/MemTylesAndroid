@@ -5,8 +5,8 @@ import {
 	Alert,
 	Modal,
 	Text,
-	Pressable,
-	View
+	TouchableOpacity,
+	View,
 }              from 'react-native';
 import styles  from '../styles';
 
@@ -27,11 +27,11 @@ export default function WonModal ({numClicks, gameTime, numTyles}) {
             <Text style={styles.modalText}>
 				In {numClicks} clicks and {gameTime} seconds for {numTyles} Tyles!
 			</Text>
-            <Pressable
+            <TouchableOpacity
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>
               <Text style={styles.textStyle}>&nbsp;OK!&nbsp;</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>

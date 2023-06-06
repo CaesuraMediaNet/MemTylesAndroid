@@ -8,7 +8,6 @@ import Card from './Card';
 import {
 	Text,
 	View,
-	Button,
 	StyleSheet,
 	TouchableOpacity,
 	BackHandler,
@@ -31,7 +30,7 @@ import {startBoard, wonBoard, twoMatching, twoMisMatching, oneSelected, twoMatch
 function Navigate ({pageNumber, setPageNumber}) {
 	return (
 		<View style={styles.greenBox}>
-			<View style={styles.spaceEvenly}>
+			<View style={styles.spaceBetween}>
 				{pageNumber > 1 && 
 				<TouchableOpacity style={styles.bigText} onPress={() => setPageNumber (pageNumber => pageNumber - 1)}>
 					<Text>Previous</Text>
@@ -165,7 +164,10 @@ function Pages ({pageNumber, setPageNumber}) {
             <Text style={styles.instructionP}>
                 You can restart the game using the Clear Board button at the top :
             </Text>
-            <Button onPress={onDemoButton} title="Clear Board" />
+			<TouchableOpacity style={styles.button} onPress={onDemoButton}>
+				<Text style={styles.buttonText}>Clear Board</Text>
+			</TouchableOpacity>
+
 			<Navigate pageNumber={pageNumber} setPageNumber={setPageNumber} />
 			</>
 		);
@@ -225,7 +227,9 @@ export default function Instructions ({setShowInstructions}) {
 	//
 	return (
 		<View style={styles.container}>
-			<Button title="Play the Game!" onPress={() => setShowInstructions(false)} />
+			<TouchableOpacity style={styles.button} onPress={() => setShowInstructions(false)}>
+				<Text style={styles.buttonText}>Play the Game!</Text>
+			</TouchableOpacity>
 			<Text style={styles.header}>How to Play</Text>
 			<Pages pageNumber={pageNumber} setPageNumber={setPageNumber} />
 

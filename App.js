@@ -23,7 +23,6 @@ import {
 	View,
 	Button,
 	FlatList,
-	Pressable,
 	TouchableOpacity,
 } from 'react-native';
 
@@ -241,9 +240,9 @@ const App: () => Node = () => {
 				</View>
 				{!showInstructions && 
 					<>
-					<Pressable style={styles.button} onPress={clearBoard}>
+					<TouchableOpacity style={styles.button} onPress={clearBoard}>
 						<Text style={styles.buttonText}>Clear Board</Text>
-					</Pressable>
+					</TouchableOpacity>
 					<View style={styles.distributed} >
 						<CardTable
 							board={board}
