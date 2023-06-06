@@ -71,6 +71,7 @@ const App: () => Node = () => {
     const [numCards, setNumCards]                   = useState(12);
     const [numClicks, setNumClicks]                 = useState(0);
     const [gameTime,setGameTime]                    = useState(0);
+    const [intervalId,setIntervalId]                = useState(-1);
     const [timerAction,setTimerAction]              = useState("start");
     const [scores,setScores]                        = useState([]);
     const [showPrivacyLink, setShowPrivacyLink]     = useState(false);
@@ -88,18 +89,6 @@ const App: () => Node = () => {
         let shuffledBoard   = shuffleCards(initBoard.slice(), numCards);
         setBoard (shuffledBoard);
 		getGetScores ();
-		/*
-		console.log ("board", board);
-		console.log ("wonPlay", wonPlay);
-		console.log ("wonAllPlay", wonAllPlay)
-		console.log ("numCards", numCards);
-		console.log ("numClicks", numClicks)
-		console.log ("gameTime", gameTime);
-		console.log ("timerAction", timerAction);
-		console.log ("scores", scores);
-		console.log ("showPrivacyLink", showPrivacyLink)
-		console.log ("showInstructions", showInstructions);
-		*/
 	}, [numCards])
 
     function handleTyleClick (card) {
@@ -130,9 +119,12 @@ const App: () => Node = () => {
         setWonPlay(false);
         setWonAllPlay(false);
         setNumClicks(0);
-        let now                = Date.now();
-        let action             = "reset" + now; // Keep resetting on button click, but action is still "reset".
-        if (wonAllPlay) action = "restart";
+
+		// Restart the timer.  The action needs to change for useEffect in GameClock to run, so
+		// make it different every time with Date.now().
+		//
+        let now    = Date.now();
+        let action = "restart" + now;
         setTimerAction ((timerAction) => action);
 		setShowInstructions (false);
     }
@@ -258,7 +250,10 @@ const App: () => Node = () => {
 								numClicks={numClicks}
 								gameTime={gameTime}
 							/>
-							<GameClock gameTime={timeGameTook} action={timerAction}  />
+							<GameClock
+								gameTime={timeGameTook}
+								action={timerAction}
+							/>
 						</View>
 					</View>
 					<SelectNumCards />
