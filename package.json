@@ -25,7 +25,8 @@
     "react-native-css-transformer": "^1.2.4",
     "react-native-drop-shadow": "^0.0.7",
     "react-native-select-dropdown": "^3.3.3",
-    "react-native-svg": "^13.9.0"
+    "react-native-svg": "^13.9.0",
+    "react-native-video": "^5.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

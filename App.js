@@ -38,6 +38,7 @@ import { faQuestion, faPlus, faMinus     } from '@fortawesome/free-solid-svg-ico
 //
 // https://www.npmjs.com/package/react-native-drop-shadow
 import DropShadow     from "react-native-drop-shadow";
+import Video          from 'react-native-video';
 
 // Local Components.
 //
@@ -230,6 +231,7 @@ const App: () => Node = () => {
 						MemTyles
 					</Text>
 				</View>
+
 				{!showInstructions && 
 					<>
 					<TouchableOpacity style={styles.button} onPress={clearBoard}>
