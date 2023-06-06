@@ -30,7 +30,7 @@ import {startBoard, wonBoard, twoMatching, twoMisMatching, oneSelected, twoMatch
 function Navigate ({pageNumber, setPageNumber}) {
 	return (
 		<View style={styles.greenBox}>
-			<View style={styles.spaceBetween}>
+			<View style={pageNumber > 1 ? styles.spaceBetween : styles.spaceEvenly}>
 				{pageNumber > 1 && 
 				<TouchableOpacity style={styles.bigText} onPress={() => setPageNumber (pageNumber => pageNumber - 1)}>
 					<Text>Previous</Text>
@@ -176,7 +176,7 @@ function Pages ({pageNumber, setPageNumber}) {
 			<>
 			<Header pageNumber={pageNumber} />
             <Text style={styles.instructionP}>
-                Your scores are in the Past Scores section.  They are saved in Cookies, so no scores are
+                Your recent five scores are in the Scores section.  They are saved on your device, so no scores are
                 recorded by us.
             </Text>
             <Text style={styles.instructionP}>
