@@ -30,7 +30,7 @@ export default function WonModal ({numClicks, gameTime, numTyles}) {
             <TouchableOpacity
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>&nbsp;OK!&nbsp;</Text>
+              <Text style={styles.textStyle}>     OK!     </Text>
             </TouchableOpacity>
           </View>
         </View>

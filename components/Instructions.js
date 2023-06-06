@@ -34,13 +34,13 @@ function Navigate ({pageNumber, setPageNumber}) {
 			<View style={pageNumber > 1 ? styles.spaceBetween : styles.spaceEvenly}>
 				{pageNumber > 1 && 
 				<TouchableOpacity style={styles.bigText} onPress={() => setPageNumber (pageNumber => pageNumber - 1)}>
-					<Text>Previous</Text>
+					<Text style={styles.medText}>Previous</Text>
 					<FontAwesomeIcon color={'dimgray'} size={35} icon={faAnglesLeft} />
 				</TouchableOpacity>
 				}
 				{pageNumber < 6 &&
 				<TouchableOpacity style={styles.bigText} onPress={() => setPageNumber (pageNumber => pageNumber + 1)}>
-					<Text>Next</Text>
+					<Text style={styles.medText}>Next</Text>
 					<FontAwesomeIcon color={'dimgray'} size={35} icon={faAnglesRight} />
 				</TouchableOpacity>
 				}
@@ -51,7 +51,7 @@ function Navigate ({pageNumber, setPageNumber}) {
 function Header ({pageNumber}) {
 	return (
 		<View style={styles.greenBox}>
-			<Text>Page {pageNumber}</Text>
+			<Text style={styles.medText}>Page {pageNumber}</Text>
 		</View>
 	);
 }
@@ -200,7 +200,7 @@ function Pages ({pageNumber, setPageNumber}) {
 			</>
 		);
 	} else {
-		return (<Text>Sorry, an error occured, try pressing the Tyles to see what happens!</Text>);
+		return (<Text style={styles.medText}>Sorry, an error occured, try pressing the Tyles to see what happens!</Text>);
 	}
 }
 

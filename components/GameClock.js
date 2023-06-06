@@ -34,10 +34,6 @@ export default function GameClock ({action, gameTime }) {
     }, [action]); // Do this whenever action changes.
 
 	return (
-		action === "stop" ? (
-			<Text style={{fontSize : 18}}>Time played : {new Date(timePlayed * 1000).toISOString().slice(11, 19)}</Text>
-		) : (
-			<Text style={{fontSize : 18}}>{new Date(timePlayed * 1000).toISOString().slice(11, 19)}</Text>
-		)
+		action !== "stop" && <Text style={styles.bigText}>{new Date(timePlayed * 1000).toISOString().slice(11, 19)}</Text>
 	);
 }

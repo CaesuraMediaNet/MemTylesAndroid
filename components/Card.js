@@ -6,7 +6,6 @@ import { useState }        from 'react';
 import { useEffect }       from 'react';
 import { useRef }          from 'react';
 import {
-	Text,
 	View,
 	StyleSheet,
 	TouchableOpacity,
@@ -17,7 +16,7 @@ import styles              from '../styles';
 
 export default function Card ({id, icon, width, height, clicked, flipped, won, colour, cardName}) {
     return (
-		<View style={flipped ? cardStyles.selectedStyle : won ? cardStyles.wonStyle : cardStyles.iconStyle}>
+		<View style={flipped ? styles.selectedStyle : won ? styles.wonStyle : styles.iconStyle}>
 			<TouchableOpacity onPress={clicked} >
 				{flipped ?
 					<FontAwesomeIcon  color={colour}    size={width} icon={icon} />
@@ -30,27 +29,3 @@ export default function Card ({id, icon, width, height, clicked, flipped, won, c
 		</View>
     );
 }
-
-const cardStyles = StyleSheet.create({
-    iconStyle : {
-        color        : 'dimgray',
-        padding      : 7,
-		alignItems   : 'center',
-		margin       : 1,
-    },
-	selectedStyle : {
-        padding      : 5,
-		borderWidth  : 2,
-		borderRadius : 4,
-		borderColor  : 'green',
-		alignItems   : 'center',
-		margin       : 1,
-	},
-	wonStyle : {
-        color        : 'dimgray',
-        padding      : 7,
-		opacity      : 0.6,
-		alignItems   : 'center',
-		margin       : 1,
-	},
-});

@@ -14,6 +14,13 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-memtyles-memtylesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-memtyles-memtylesTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		53ACEA7D2BF64FBA9FC4ED76 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = A487F34B4C5F4F3B9012FCAA /* OFL.txt */; };
+		55371DDDCA8D41318EE71940 /* AveriaSansLibreBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F8CD7DD51EFC4030982ADB32 /* AveriaSansLibreBold.ttf */; };
+		9ED0E03AB13D4DCD91CC33EE /* AveriaSansLibreBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38A2AC85D8344E6A8F48AD7B /* AveriaSansLibreBoldItalic.ttf */; };
+		5235D41C82764468B429F529 /* AveriaSansLibreItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4595C376E59C4C198F42A8EF /* AveriaSansLibreItalic.ttf */; };
+		C679D1E3D8254713807685C2 /* AveriaSansLibreLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA92758B74484702996B51C4 /* AveriaSansLibreLight.ttf */; };
+		C4C2933138AE4176B0E9CC59 /* AveriaSansLibreLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBAE02007E08486791CB5951 /* AveriaSansLibreLightItalic.ttf */; };
+		76F61A09558E4ECFB7A4C3CF /* AveriaSansLibreRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14C0D75FAE6F45CFAA97DAA8 /* AveriaSansLibreRegular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +51,13 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = memtyles/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-memtyles-memtylesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-memtyles-memtylesTests.release.xcconfig"; path = "Target Support Files/Pods-memtyles-memtylesTests/Pods-memtyles-memtylesTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		A487F34B4C5F4F3B9012FCAA /* OFL.txt */ = {isa = PBXFileReference; name = "OFL.txt"; path = "../src/assets/fonts/OFL.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F8CD7DD51EFC4030982ADB32 /* AveriaSansLibreBold.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibreBold.ttf"; path = "../src/assets/fonts/AveriaSansLibreBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		38A2AC85D8344E6A8F48AD7B /* AveriaSansLibreBoldItalic.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibreBoldItalic.ttf"; path = "../src/assets/fonts/AveriaSansLibreBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4595C376E59C4C198F42A8EF /* AveriaSansLibreItalic.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibreItalic.ttf"; path = "../src/assets/fonts/AveriaSansLibreItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CA92758B74484702996B51C4 /* AveriaSansLibreLight.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibreLight.ttf"; path = "../src/assets/fonts/AveriaSansLibreLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FBAE02007E08486791CB5951 /* AveriaSansLibreLightItalic.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibreLightItalic.ttf"; path = "../src/assets/fonts/AveriaSansLibreLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		14C0D75FAE6F45CFAA97DAA8 /* AveriaSansLibreRegular.ttf */ = {isa = PBXFileReference; name = "AveriaSansLibreRegular.ttf"; path = "../src/assets/fonts/AveriaSansLibreRegular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +136,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				691535EF9C9A46CDA8E9F585 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +162,21 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		691535EF9C9A46CDA8E9F585 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				A487F34B4C5F4F3B9012FCAA /* OFL.txt */,
+				F8CD7DD51EFC4030982ADB32 /* AveriaSansLibreBold.ttf */,
+				38A2AC85D8344E6A8F48AD7B /* AveriaSansLibreBoldItalic.ttf */,
+				4595C376E59C4C198F42A8EF /* AveriaSansLibreItalic.ttf */,
+				CA92758B74484702996B51C4 /* AveriaSansLibreLight.ttf */,
+				FBAE02007E08486791CB5951 /* AveriaSansLibreLightItalic.ttf */,
+				14C0D75FAE6F45CFAA97DAA8 /* AveriaSansLibreRegular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -244,6 +274,13 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				53ACEA7D2BF64FBA9FC4ED76 /* OFL.txt in Resources */,
+				55371DDDCA8D41318EE71940 /* AveriaSansLibreBold.ttf in Resources */,
+				9ED0E03AB13D4DCD91CC33EE /* AveriaSansLibreBoldItalic.ttf in Resources */,
+				5235D41C82764468B429F529 /* AveriaSansLibreItalic.ttf in Resources */,
+				C679D1E3D8254713807685C2 /* AveriaSansLibreLight.ttf in Resources */,
+				C4C2933138AE4176B0E9CC59 /* AveriaSansLibreLightItalic.ttf in Resources */,
+				76F61A09558E4ECFB7A4C3CF /* AveriaSansLibreRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -79,10 +79,6 @@ const App: () => Node = () => {
     const [showPrivacyLink, setShowPrivacyLink]     = useState(false);
 	const [showInstructions, setShowInstructions]   = useState(false);
 
-    const numCardsRef                               = useRef();
-    const instructionsRef                           = useRef();
-    const instructionsButtonRef                     = useRef();
-
 	useEffect(() => {
 		SplashScreen.hide();
 		async function getGetScores () {
@@ -217,7 +213,6 @@ const App: () => Node = () => {
 			<ScrollView
 				contentInsetAdjustmentBehavior="automatic"
 				keyboardShouldPersistTaps='handled'
-				ref={instructionsRef}
 			>
 				{!showInstructions && 
 					<DropShadow style={[styles.help, styles.shadow]}>
@@ -265,7 +260,7 @@ const App: () => Node = () => {
 					{scores.length > 0 &&
 						<View style={styles.greenBox}>
 							<View style={styles.centre}>
-								<Text style={styles.sectionText} >Scores</Text>
+								<Text style={[styles.sectionText, styles.typeFace]} >Scores</Text>
 								<ScoresTable scores={scores} clearScores={clearAllScores} />
 							</View>
 						</View>

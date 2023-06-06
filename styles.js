@@ -4,12 +4,16 @@ import {
 } from 'react-native';
 
 export default styles = StyleSheet.create({
+	typeFace              : {
+		fontFamily        : 'AveriaSansLibreRegular',
+	},
     container             : {
         padding           : 10,
+		fontFamily        : 'AveriaSansLibreRegular',
     },
     title                 : {
+		fontFamily        : 'AveriaSansLibreBold',
         fontSize          : 36,
-        fontWeight        : 'bold',
     },
     distributed           : {
         padding           : 5,
@@ -21,7 +25,7 @@ export default styles = StyleSheet.create({
         alignItems        : 'center',
         borderWidth       : 1,
         borderRadius      : 4,
-        borderColor       : 'green',
+        borderColor       : '#2dce89',
     },
     help                  : {
         position          : "absolute",
@@ -45,14 +49,14 @@ export default styles = StyleSheet.create({
         padding           : 5,
         borderWidth       : 1,
         borderRadius      : 4,
-        borderColor       : 'green',
+        borderColor       : '#2dce89',
     },
     shadow                : {
         shadowOffset      : {
             width         : 2,
             height        : 1
         },
-        shadowColor       : 'green',
+        shadowColor       : '#2dce89',
         shadowOpacity     : 0.5,
         shadowRadius      : 2,
     },
@@ -63,14 +67,14 @@ export default styles = StyleSheet.create({
         paddingHorizontal : 32,
         borderRadius      : 7,
         elevation         : 3,
-        backgroundColor   : 'green',
+        backgroundColor   : '#2dce89',
     },
     buttonText            : {
         fontSize          : 16,
         lineHeight        : 21,
-        fontWeight        : 'bold',
         letterSpacing     : 0.25,
         color             : 'white',
+		fontFamily        : 'AveriaSansLibreBold',
     },
 	iconStyle             : {
         color             : 'dimgray',
@@ -82,7 +86,7 @@ export default styles = StyleSheet.create({
         padding           : 5,
         borderWidth       : 2,
         borderRadius      : 4,
-        borderColor       : 'green',
+        borderColor       : '#2dce89',
         alignItems        : 'center',
         margin            : 1,
     },
@@ -96,10 +100,12 @@ export default styles = StyleSheet.create({
     instructionP          : {
         marginTop         : 10,
         marginBottom      : 10,
+		fontFamily        : 'AveriaSansLibreRegular',
     },
     header                : {
         marginTop         : 25,
         fontSize          : 24,
+		fontFamily        : 'AveriaSansLibreRegular',
     },
     flexible              : {
         flex              : 1,
@@ -126,36 +132,46 @@ export default styles = StyleSheet.create({
 		shadowOpacity     : 0.25,
 		shadowRadius      : 4,
 		elevation         : 5,
+		fontFamily        : 'AveriaSansLibreRegular',
 	},
 	buttonOpen            : {
 		backgroundColor   : '#F194FF',
+		fontFamily        : 'AveriaSansLibreRegular',
 	},
 	buttonClose           : {
 		backgroundColor   : '#2196F3',
+		fontFamily        : 'AveriaSansLibreRegular',
 	},
 	textStyle             : {
 		color             : 'white',
-		fontWeight        : 'bold',
 		textAlign         : 'center',
+		fontFamily        : 'AveriaSansLibreBold',
 	},
 	modalText             : {
 		marginBottom      : 15,
 		textAlign         : 'center',
+		fontFamily        : 'AveriaSansLibreRegular',
 	},
 	modalHeader           : {
-		fontWeight        : 'bold',
 		marginBottom      : 15,
 		textAlign         : 'center',
+		fontFamily        : 'AveriaSansLibreBold',
 	},
 	centre                : {
-		alignItems        : 'center'
+		alignItems        : 'center',
 	},
 	sectionText           : {
 		fontSize          : 18,
-		marginTop         : 7
+		marginTop         : 7,
+		fontFamily        : 'AveriaSansLibreRegular',
+	},
+	medText               : {
+		fontSize          : 16,
+		fontFamily        : 'AveriaSansLibreRegular',
 	},
 	bigText               : {
-		fontSize          : 24
+		fontSize          : 24,
+		fontFamily        : 'AveriaSansLibreRegular',
 	},
 	videoContainer        : {
 		width             : "100%",

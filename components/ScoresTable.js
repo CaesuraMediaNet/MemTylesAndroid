@@ -9,7 +9,7 @@ import styles  from '../styles';
 function ScoreItem ({gameTime, numCards, numClicks}) {
 	return (
 		<View>
-			<Text>{numCards} cards in {numClicks} clicks and {gameTime} seconds</Text>
+			<Text style={styles.medText}>{numCards} cards in {numClicks} clicks and {gameTime} seconds</Text>
 		</View>
 	);
 }
