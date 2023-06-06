@@ -1,6 +1,7 @@
 // The main board used for the game and more demo/instruction boards.
 //
-import React from 'react';
+import React        from 'react';
+import styles       from '../styles';
 import shuffleCards from '../functions/shuffleCards';
 import {
 	faUserSecret,

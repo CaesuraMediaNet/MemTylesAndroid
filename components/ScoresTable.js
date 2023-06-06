@@ -1,5 +1,10 @@
-import React from 'react';
-import {View, Text, Button} from 'react-native';
+import React   from 'react';
+import {
+	View,
+	Text,
+	Pressable,
+}              from 'react-native';
+import styles  from '../styles';
 
 function ScoreItem ({gameTime, numCards, numClicks}) {
 	return (
@@ -21,7 +26,9 @@ export default function ScoresTable ({scores, clearScores}) {
 					/>
 				);
 			})}
-			<Button onPress={clearScores} title="Clear Scores" />
+			<Pressable onPress={clearScores} style={styles.button}>
+				<Text style={styles.buttonText}>Clear Scores</Text>
+			</Pressable>
 		</View>
 	);
 }

@@ -37,13 +37,14 @@ import { faQuestion, faPlus, faMinus     } from '@fortawesome/free-solid-svg-ico
 
 // Other community libs.
 //
-import SelectDropdown from 'react-native-select-dropdown'
+// https://www.npmjs.com/package/react-native-drop-shadow
+import DropShadow     from "react-native-drop-shadow";
 
 // Local Components.
 //
+import styles       from './styles';
 import Card         from './components/Card';
 import GameClock    from './components/GameClock';
-import MtRow        from './components/MtRow';
 import Progress     from './components/Progress';
 import CardTable    from './components/CardTable';
 import Instructions from './components/Instructions';
@@ -79,18 +80,6 @@ const App: () => Node = () => {
     const numCardsRef                               = useRef();
     const instructionsRef                           = useRef();
     const instructionsButtonRef                     = useRef();
-		/*
-		console.log ("board", board);
-		console.log ("wonPlay", wonPlay);
-		console.log ("wonAllPlay", wonAllPlay)
-		console.log ("numCards", numCards);
-		console.log ("numClicks", numClicks)
-		console.log ("gameTime", gameTime);
-		console.log ("timerAction", timerAction);
-		console.log ("scores", scores);
-		console.log ("showPrivacyLink", showPrivacyLink)
-		console.log ("showInstructions", showInstructions);
-		*/
 
 	useEffect(() => {
 		async function getGetScores () {
@@ -209,15 +198,15 @@ const App: () => Node = () => {
 	function SelectNumCards () {
 		return (
 			<View style={styles.greenBox}>
-				<View style={{alignItems : 'center'}}>
-					<Text style={{fontSize : 18, marginTop : 7}} >Select Number of Tyles</Text>
+				<View style={styles.centre}>
+					<Text style={styles.sectionText} >Select Number of Tyles</Text>
 				</View>
 				<View style={styles.spaceEvenly}>
-					<TouchableOpacity style={{fontSize : 24}} onPress={decreaseNumCards}>
+					<TouchableOpacity style={styles.bigText} onPress={decreaseNumCards}>
 						<FontAwesomeIcon color={'dimgray'} size={35} icon={faMinus} />	
 					</TouchableOpacity>
-					<Text style={{fontSize : 24}}>{numCards}</Text>
-					<TouchableOpacity style={{fontSize : 24}} onPress={increaseNumCards}>
+					<Text style={styles.bigText}>{numCards}</Text>
+					<TouchableOpacity style={styles.bigText} onPress={increaseNumCards}>
 						<FontAwesomeIcon color={'dimgray'} size={35} icon={faPlus} />	
 					</TouchableOpacity>
 				</View>
@@ -237,22 +226,24 @@ const App: () => Node = () => {
 				ref={instructionsRef}
 			>
 				{!showInstructions && 
-					<View style={styles.help}>
+					<DropShadow style={[styles.help, styles.shadow]}>
 						<TouchableOpacity
 							onPress={() => setShowInstructions (true)}
 						>
 							<FontAwesomeIcon  color={'dimgray'} size={35} icon={faQuestion} />	
 						</TouchableOpacity>
-					</View>
+					</DropShadow>
 				}
-				<View style={{alignItems : 'center'}}>
+				<View style={styles.centre}>
 					<Text style={styles.title}>
 						MemTyles
 					</Text>
 				</View>
 				{!showInstructions && 
 					<>
-					<Button onPress={clearBoard} title="Clear Board" />
+					<Pressable style={styles.button} onPress={clearBoard}>
+						<Text style={styles.buttonText}>Clear Board</Text>
+					</Pressable>
 					<View style={styles.distributed} >
 						<CardTable
 							board={board}
@@ -275,8 +266,8 @@ const App: () => Node = () => {
 					{wonAllPlay && <WonModal numClicks={numClicks} gameTime={gameTime} numTyles={numCards} />}
 					{scores.length > 0 &&
 						<View style={styles.greenBox}>
-							<View style={{alignItems : 'center'}}>
-								<Text style={{fontSize : 18, marginTop : 7}} >Scores</Text>
+							<View style={styles.centre}>
+								<Text style={styles.sectionText} >Scores</Text>
 								<ScoresTable scores={scores} clearScores={clearAllScores} />
 							</View>
 						</View>
@@ -288,46 +279,5 @@ const App: () => Node = () => {
 		</SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-	container : {
-		padding        : 10,
-	},
-	title : {
-		fontSize       : 36,
-		fontWeight     : 'bold',
-	},
-	distributed : {
-		padding        : 5,
-		marginTop      : 7,
-		marginBottom   : 7,
-		flex           : 1,
-		flexDirection  : 'row',
-		flexWrap       : 'wrap',
-		alignItems     : 'center',
-		borderWidth    : 1,
-		borderRadius   : 4,
-		borderColor    : 'green',
-	},
-	help : {
-		position       : "absolute",
-		top            : 0,
-		right          : 0,
-		zIndex         : 1,
-	},
-	spaceEvenly : {
-		flexDirection  : "row",
-		justifyContent : "space-evenly",
-		alignItems     : 'center',
-	},
-	greenBox : {
-		marginTop      : 7,
-		marginBottom   : 7,
-		padding        : 5,
-		borderWidth    : 1,
-		borderRadius   : 4,
-		borderColor    : 'green',
-	},
-});
 
 export default App;

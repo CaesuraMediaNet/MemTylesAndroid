@@ -1,11 +1,12 @@
 // Card table of Tyles (aka Cards).
 //
-import React from 'react';
+import React  from 'react';
 import {
 	Text,
 	View,
-}                          from 'react-native';
-import Card from './Card';
+}             from 'react-native';
+import styles from '../styles';
+import Card   from './Card';
 
 export default function CardTable ({board, handleTyleClick, numCards}) {
 	console.log ("CardTable : numCards : ", numCards);

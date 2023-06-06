@@ -2,6 +2,7 @@
 //
 import React from 'react';
 import { useRef, useState, useEffect } from 'react';
+import styles from '../styles';
 import CardTable from './CardTable';
 import Card from './Card';
 import {
@@ -32,13 +33,13 @@ function Navigate ({pageNumber, setPageNumber}) {
 		<View style={styles.greenBox}>
 			<View style={styles.spaceEvenly}>
 				{pageNumber > 1 && 
-				<TouchableOpacity style={{fontSize : 24}} onPress={() => setPageNumber (pageNumber => pageNumber - 1)}>
+				<TouchableOpacity style={styles.bigText} onPress={() => setPageNumber (pageNumber => pageNumber - 1)}>
 					<Text>Previous</Text>
 					<FontAwesomeIcon color={'dimgray'} size={35} icon={faAnglesLeft} />
 				</TouchableOpacity>
 				}
 				{pageNumber < 6 &&
-				<TouchableOpacity style={{fontSize : 24}} onPress={() => setPageNumber (pageNumber => pageNumber + 1)}>
+				<TouchableOpacity style={styles.bigText} onPress={() => setPageNumber (pageNumber => pageNumber + 1)}>
 					<Text>Next</Text>
 					<FontAwesomeIcon color={'dimgray'} size={35} icon={faAnglesRight} />
 				</TouchableOpacity>
@@ -337,33 +338,3 @@ export default function Instructions ({setShowInstructions}) {
 		</View>
 	);
 }
-const styles = StyleSheet.create({
-	container : {
-	},
-	instructionP : {
-		marginTop       : 10,
-		marginBottom    : 10,
-	},
-	header : {
-		marginTop       : 25,
-		fontSize        : 24,
-	},
-	flexible : {
-		flex            : 1,
-		flexDirection   : 'row',
-		flexWrap        : 'wrap',
-	},
-    spaceEvenly : {
-        flexDirection  : "row",
-        justifyContent : "space-evenly",
-        alignItems     : 'center',
-    },
-    greenBox : {
-        marginTop      : 7,
-        marginBottom   : 7,
-        padding        : 5,
-        borderWidth    : 1,
-        borderRadius   : 4,
-        borderColor    : 'green',
-    },
-});

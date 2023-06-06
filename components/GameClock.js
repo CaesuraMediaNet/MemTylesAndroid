@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { Text, View } from 'react-native';
+import styles from '../styles';
 
 export default function GameClock ({action, gameTime}) {
     const [timePlayed,setTimePlayed]  = useState(0);
@@ -37,9 +38,9 @@ export default function GameClock ({action, gameTime}) {
 
 	return (
 		action === "stop" ? (
-			<Text style={{fontSize : 18}}>Time played : {new Date(timePlayed * 1000).toISOString().slice(11, 19)}</Text>
+			<Text style={styles.bigText}>Time played : {new Date(timePlayed * 1000).toISOString().slice(11, 19)}</Text>
 		) : (
-			<Text style={{fontSize : 18}}>{new Date(timePlayed * 1000).toISOString().slice(11, 19)}</Text>
+			<Text style={styles.bigText}>{new Date(timePlayed * 1000).toISOString().slice(11, 19)}</Text>
 		)
 	);
 }

@@ -13,7 +13,7 @@ import {
 }                          from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faPuzzlePiece }   from '@fortawesome/free-solid-svg-icons'
-import styles              from '../styles/memtyles.module.css';
+import styles              from '../styles';
 
 export default function Card ({id, icon, width, height, clicked, flipped, won, colour, cardName}) {
     return (
@@ -33,9 +33,10 @@ export default function Card ({id, icon, width, height, clicked, flipped, won, c
 
 const cardStyles = StyleSheet.create({
     iconStyle : {
-        color   : 'dimgray',
-        padding : 7,
+        color        : 'dimgray',
+        padding      : 7,
 		alignItems   : 'center',
+		margin       : 1,
     },
 	selectedStyle : {
         padding      : 5,
@@ -43,11 +44,13 @@ const cardStyles = StyleSheet.create({
 		borderRadius : 4,
 		borderColor  : 'green',
 		alignItems   : 'center',
+		margin       : 1,
 	},
 	wonStyle : {
-        color   : 'dimgray',
-        padding : 7,
-		opacity : 0.6,
+        color        : 'dimgray',
+        padding      : 7,
+		opacity      : 0.6,
 		alignItems   : 'center',
+		margin       : 1,
 	},
 });
