@@ -11,6 +11,7 @@ import {
 	StyleSheet,
 	TouchableOpacity,
 	BackHandler,
+	ScrollView,
 }                                 from 'react-native';
 import { FontAwesomeIcon }        from '@fortawesome/react-native-fontawesome';
 import {
@@ -205,7 +206,8 @@ function Pages ({pageNumber, setPageNumber}) {
 }
 
 export default function Instructions ({setShowInstructions}) {
-	const [pageNumber, setPageNumber] = useState (1);
+	const [pageNumber, setPageNumber] = useState(1);
+	const pageRef                     = useRef();
 
 	// https://reactnative.dev/docs/backhandler
 	//
@@ -234,15 +236,24 @@ export default function Instructions ({setShowInstructions}) {
 		return () => backHandler.remove();
 	},[pageNumber]);
 
+	useEffect(() => {
+		function scrollToTop () {
+			pageRef.current.scrollTo ({x : 0, y : 0, animated : true});
+		}
+		setTimeout (scrollToTop, 1000);
+	},[pageNumber]);
+
 	// Help Pages.
 	//
 	return (
-		<View style={styles.container}>
-			<TouchableOpacity style={styles.button} onPress={() => setShowInstructions(false)}>
-				<Text style={styles.buttonText}>Play the Game!</Text>
-			</TouchableOpacity>
-			<Text style={styles.header}>How to Play</Text>
-			<Pages pageNumber={pageNumber} setPageNumber={setPageNumber} />
-		</View>
+		<ScrollView ref={pageRef}>
+			<View style={styles.container}>
+				<TouchableOpacity style={styles.button} onPress={() => setShowInstructions(false)}>
+					<Text style={styles.buttonText}>Play the Game!</Text>
+				</TouchableOpacity>
+				<Text style={styles.header}>How to Play</Text>
+				<Pages pageNumber={pageNumber} setPageNumber={setPageNumber} />
+			</View>
+		</ScrollView>
 	);
 }
