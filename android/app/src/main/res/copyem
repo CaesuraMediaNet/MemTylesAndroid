@@ -1,0 +1,12 @@
+cp /home/andyc/BUILD/memtyles-react-native/android/drawable-mdpi/memtyles-logo.png ./mipmap-mdpi/ic_launcher_round.png
+cp /home/andyc/BUILD/memtyles-react-native/android/drawable-mdpi/memtyles-logo.png ./mipmap-mdpi/ic_launcher.png
+cp /home/andyc/BUILD/memtyles-react-native/android/drawable-xhdpi/memtyles-logo.png ./mipmap-hdpi/ic_launcher_round.png
+cp /home/andyc/BUILD/memtyles-react-native/android/drawable-xhdpi/memtyles-logo.png ./mipmap-hdpi/ic_launcher.png
+cp /home/andyc/BUILD/memtyles-react-native/android/drawable-xxhdpi/memtyles-logo.png ./mipmap-xxhdpi/ic_launcher_round.png
+cp /home/andyc/BUILD/memtyles-react-native/android/drawable-xxhdpi/memtyles-logo.png ./mipmap-xxhdpi/ic_launcher.png
+cp /home/andyc/BUILD/memtyles-react-native/android/drawable-mdpi/memtyles-logo.png ./drawable-mdpi/node_modules_reactnative_libraries_newappscreen_components_logo.png
+cp /home/andyc/BUILD/memtyles-react-native/android/drawable-xhdpi/memtyles-logo.png ./mipmap-xhdpi/ic_launcher_round.png
+cp /home/andyc/BUILD/memtyles-react-native/android/drawable-xhdpi/memtyles-logo.png ./mipmap-xhdpi/ic_launcher.png
+cp /home/andyc/BUILD/memtyles-react-native/android/drawable-xxxhdpi/memtyles-logo.png ./mipmap-xxxhdpi/ic_launcher_round.png
+cp /home/andyc/BUILD/memtyles-react-native/android/drawable-xxxhdpi/memtyles-logo.png ./mipmap-xxxhdpi/ic_launcher.png
+

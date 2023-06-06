@@ -39,6 +39,7 @@ import { faQuestion, faPlus, faMinus     } from '@fortawesome/free-solid-svg-ico
 // https://www.npmjs.com/package/react-native-drop-shadow
 import DropShadow     from "react-native-drop-shadow";
 import Video          from 'react-native-video';
+import SplashScreen   from 'react-native-splash-screen';
 
 // Local Components.
 //
@@ -83,6 +84,7 @@ const App: () => Node = () => {
     const instructionsButtonRef                     = useRef();
 
 	useEffect(() => {
+		SplashScreen.hide();
 		async function getGetScores () {
 			let currentScores   = await getScores();
 			setScores ((scores) => currentScores);
