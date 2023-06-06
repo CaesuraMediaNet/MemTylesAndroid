@@ -29,7 +29,7 @@ export default styles = StyleSheet.create({
     },
     help                  : {
         position          : "absolute",
-        top               : 0,
+        top               : 10,
         right             : 0,
         zIndex            : 1,
     },

@@ -32,7 +32,11 @@ import {
 	Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faQuestion, faPlus, faMinus     } from '@fortawesome/free-solid-svg-icons';
+import {
+	faQuestion,
+	faPlus,
+	faMinus
+} from '@fortawesome/free-solid-svg-icons';
 
 // Other community libs.
 //
@@ -223,7 +227,7 @@ const App: () => Node = () => {
 						</TouchableOpacity>
 					</DropShadow>
 				}
-				<View style={styles.centre}>
+				<View style={[styles.centre, styles.greenBox]}>
 					<Text style={styles.title}>
 						MemTyles
 					</Text>
