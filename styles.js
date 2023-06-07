@@ -188,5 +188,9 @@ export default styles = StyleSheet.create({
 	},
 	instructionsHeader    : {
 		marginTop         : 10,
+	},
+	logoImage             : {
+		width             : 50,
+		height            : 50,
 	}
 });

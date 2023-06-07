@@ -24,6 +24,7 @@ import {
 	Button,
 	FlatList,
 	TouchableOpacity,
+	Image,
 } from 'react-native';
 
 // FontAwesome.
@@ -35,7 +36,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
 	faQuestion,
 	faPlus,
-	faMinus
+	faMinus,
+	faPlay,
 } from '@fortawesome/free-solid-svg-icons';
 
 // Other community libs.
@@ -220,19 +222,31 @@ const App: () => Node = () => {
 				keyboardShouldPersistTaps='handled'
 				ref={pageRef}
 			>
-				{!showInstructions && 
-					<DropShadow style={[styles.help, styles.shadow]}>
-						<TouchableOpacity
-							onPress={() => setShowInstructions (true)}
-						>
-							<FontAwesomeIcon  color={'dimgray'} size={35} icon={faQuestion} />	
-						</TouchableOpacity>
-					</DropShadow>
-				}
-				<View style={[styles.centre, styles.greenBox]}>
+				<View style={[styles.spaceBetween, styles.greenBox]}>
+					<Image
+						source={require ("./src/assets/images/memtyles-logo.png")}
+						style={styles.logoImage}
+					/>
 					<Text style={styles.title}>
 						MemTyles
 					</Text>
+					{showInstructions ? (
+						<DropShadow style={styles.shadow}>
+							<TouchableOpacity
+								onPress={() => setShowInstructions (false)}
+							>
+								<FontAwesomeIcon  color={'dimgray'} size={35} icon={faPlay} />	
+							</TouchableOpacity>
+						</DropShadow>
+					) : (
+						<DropShadow style={styles.shadow}>
+							<TouchableOpacity
+								onPress={() => setShowInstructions (true)}
+							>
+								<FontAwesomeIcon  color={'dimgray'} size={35} icon={faQuestion} />	
+							</TouchableOpacity>
+						</DropShadow>
+					)}
 				</View>
 
 				{!showInstructions && 
