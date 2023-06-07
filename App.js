@@ -114,6 +114,7 @@ const App: () => Node = () => {
             numCards  : numCards,
             numClicks : numClicks,
             gameTime  : timeS,
+			date      : new Date().toLocaleString('en-GB', { timeZone: 'UTC' }),
         }
         let allScores = await addScore (thisGame);
         setScores (allScores);

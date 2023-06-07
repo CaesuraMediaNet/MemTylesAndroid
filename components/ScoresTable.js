@@ -6,10 +6,10 @@ import {
 }              from 'react-native';
 import styles  from '../styles';
 
-function ScoreItem ({gameTime, numCards, numClicks}) {
+function ScoreItem ({gameTime, numCards, numClicks, date}) {
 	return (
 		<View>
-			<Text style={styles.medText}>{numCards} cards in {numClicks} clicks and {gameTime} seconds</Text>
+			<Text style={styles.medText}>{date} : {numCards} cards in {numClicks} clicks and {gameTime} seconds</Text>
 		</View>
 	);
 }
@@ -23,6 +23,7 @@ export default function ScoresTable ({scores, clearScores}) {
 						gameTime={score.gameTime}
 						numCards={score.numCards}
 						numClicks={score.numClicks}
+						date={score.date}
 					/>
 				);
 			})}
