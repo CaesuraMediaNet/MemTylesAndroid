@@ -19,7 +19,8 @@ import {
 	faAnglesRight,
 	faAnglesLeft
 }                                 from '@fortawesome/free-solid-svg-icons';
-import Video                      from 'react-native-video';
+// import Video                      from 'react-native-video';
+import VideoPlayer                from 'react-native-video-controls';
 
 function handleTyleClick () {
 	return null;
@@ -201,12 +202,12 @@ function Pages ({pageNumber, setPageNumber}) {
                 Here is a video showing a game being played on the web version at memtyles.com :
             </Text>
 			<View style={styles.videoContainer}>
-                <Video
+                <VideoPlayer
                     source={require ("../video/DemoVideo.mp4")}
                     resizeMode='contain'
-					controls={true}
 					paused={true}
                     style={styles.video}
+					onBack={() => {}}
                 />
 			</View>
 
