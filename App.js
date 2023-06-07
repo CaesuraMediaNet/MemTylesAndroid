@@ -82,6 +82,7 @@ const App: () => Node = () => {
     const [scores,setScores]                        = useState([]);
     const [showPrivacyLink, setShowPrivacyLink]     = useState(false);
 	const [showInstructions, setShowInstructions]   = useState(false);
+	const pageRef                                   = useRef();
 
 	useEffect(() => {
 		SplashScreen.hide();
@@ -217,6 +218,7 @@ const App: () => Node = () => {
 			<ScrollView
 				contentInsetAdjustmentBehavior="automatic"
 				keyboardShouldPersistTaps='handled'
+				ref={pageRef}
 			>
 				{!showInstructions && 
 					<DropShadow style={[styles.help, styles.shadow]}>
@@ -271,7 +273,7 @@ const App: () => Node = () => {
 					}
 					</>
 				}
-				{showInstructions && <Instructions setShowInstructions={setShowInstructions}/>}
+				{showInstructions && <Instructions pageRef={pageRef} setShowInstructions={setShowInstructions}/>}
 			</ScrollView>
 		</SafeAreaView>
   );

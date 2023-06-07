@@ -39,7 +39,7 @@ function Navigate ({pageNumber, setPageNumber}) {
 					<FontAwesomeIcon color={'dimgray'} size={35} icon={faAnglesLeft} />
 				</TouchableOpacity>
 				}
-				{pageNumber < 6 &&
+				{pageNumber < 8 &&
 				<TouchableOpacity style={styles.bigText} onPress={() => setPageNumber (pageNumber => pageNumber + 1)}>
 					<Text style={styles.medText}>Next</Text>
 					<FontAwesomeIcon color={'dimgray'} size={35} icon={faAnglesRight} />
@@ -51,8 +51,8 @@ function Navigate ({pageNumber, setPageNumber}) {
 }
 function Header ({pageNumber}) {
 	return (
-		<View style={styles.greenBox}>
-			<Text style={styles.medText}>Page {pageNumber}</Text>
+		<View style={styles.instructionsHeader}>
+			<Text style={styles.medText}>How to Play : Page {pageNumber}</Text>
 		</View>
 	);
 }
@@ -128,6 +128,13 @@ function Pages ({pageNumber, setPageNumber}) {
                     numCards={12}
                 />
             </View>
+			<Navigate pageNumber={pageNumber} setPageNumber={setPageNumber} />
+			</>
+		);
+	} else if  (pageNumber === 5) {
+		return (
+			<>
+			<Header pageNumber={pageNumber} />
             <Text style={styles.instructionP}>
                 ...you can turn either one (or both) back over by clicking on it (them) again  (just
                 the envelope here) :
@@ -142,7 +149,7 @@ function Pages ({pageNumber, setPageNumber}) {
 			<Navigate pageNumber={pageNumber} setPageNumber={setPageNumber} />
 			</>
 		);
-	} else if  (pageNumber === 5) {
+	} else if  (pageNumber === 6) {
 		return (
 			<>
 			<Header pageNumber={pageNumber} />
@@ -156,7 +163,13 @@ function Pages ({pageNumber, setPageNumber}) {
                     numCards={12}
                 />
             </View>
-
+			<Navigate pageNumber={pageNumber} setPageNumber={setPageNumber} />
+			</>
+		);
+	} else if  (pageNumber === 7) {
+		return (
+			<>
+			<Header pageNumber={pageNumber} />
             <Text style={styles.instructionP}>
                 You can change the number of Tyles on the board with the selector under the game.  We have
                 started you on 12, but you can select 4 (easy!), 12, 16, 20, 36, 42 or if you are
@@ -173,7 +186,7 @@ function Pages ({pageNumber, setPageNumber}) {
 			<Navigate pageNumber={pageNumber} setPageNumber={setPageNumber} />
 			</>
 		);
-	} else if  (pageNumber === 6) {
+	} else if  (pageNumber === 8) {
 		return (
 			<>
 			<Header pageNumber={pageNumber} />
@@ -205,9 +218,8 @@ function Pages ({pageNumber, setPageNumber}) {
 	}
 }
 
-export default function Instructions ({setShowInstructions}) {
+export default function Instructions ({setShowInstructions, pageRef}) {
 	const [pageNumber, setPageNumber] = useState(1);
-	const pageRef                     = useRef();
 
 	// https://reactnative.dev/docs/backhandler
 	//
@@ -238,22 +250,19 @@ export default function Instructions ({setShowInstructions}) {
 
 	useEffect(() => {
 		function scrollToTop () {
-			pageRef.current.scrollTo ({x : 0, y : 0, animated : true});
+			pageRef.current.scrollTo ({x : 0, y : 0, animated : false});
 		}
-		setTimeout (scrollToTop, 1000);
+		scrollToTop();
 	},[pageNumber]);
 
 	// Help Pages.
 	//
 	return (
-		<ScrollView ref={pageRef}>
-			<View style={styles.container}>
-				<TouchableOpacity style={styles.button} onPress={() => setShowInstructions(false)}>
-					<Text style={styles.buttonText}>Play the Game!</Text>
-				</TouchableOpacity>
-				<Text style={styles.header}>How to Play</Text>
-				<Pages pageNumber={pageNumber} setPageNumber={setPageNumber} />
-			</View>
-		</ScrollView>
+		<View style={styles.container}>
+			<TouchableOpacity style={styles.button} onPress={() => setShowInstructions(false)}>
+				<Text style={styles.buttonText}>Play the Game!</Text>
+			</TouchableOpacity>
+			<Pages pageNumber={pageNumber} setPageNumber={setPageNumber} />
+		</View>
 	);
 }

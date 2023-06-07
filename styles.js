@@ -185,5 +185,8 @@ export default styles = StyleSheet.create({
 		bottom            : 0,
 		backgroundColor   : 'white',
 		justifyContent    : 'center',
+	},
+	instructionsHeader    : {
+		marginTop         : 10,
 	}
 });
