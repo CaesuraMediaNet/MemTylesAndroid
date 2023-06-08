@@ -95,10 +95,10 @@ const App: () => Node = () => {
         let shuffledBoard   = shuffleCards(initBoard.slice(), numCards);
         setBoard (shuffledBoard);
 		getGetScores ();
+		console.log ("App useEffect numCards : ", numCards);
 	}, [numCards])
 
     function handleTyleClick (card) {
-		setShowInstructions (false);
         let { won, wonAll } = flipCard (card, numClicks, setNumClicks, board, setBoard);
         if (won)    setWonPlay    (true);
         if (wonAll) {
@@ -120,7 +120,6 @@ const App: () => Node = () => {
         setScores (allScores);
     }
     function clearBoard () {
-		console.log ("clearBoard called");
         let shuffledCards = shuffleCards(initBoard.slice(), numCards);
         setBoard(shuffledCards);
         setWonPlay(false);
@@ -133,10 +132,8 @@ const App: () => Node = () => {
         let now    = Date.now();
         let action = "restart" + now;
         setTimerAction ((timerAction) => action);
-		setShowInstructions (false);
     }
 	function changeNumCards (selectedItem) {
-		console.log ("changeNumCards : ", selectedItem);
         setNumCards  (selectedItem);
         clearBoard ();
     }
@@ -225,28 +222,24 @@ const App: () => Node = () => {
 			>
 				<View style={[styles.spaceBetween, styles.greenBox]}>
 					<Image
-						source={require ("./src/assets/images/memtyles-logo.png")}
+						source={require ("./src/assets/images/memtyles-icon.png")}
 						style={styles.logoImage}
 					/>
 					<Text style={styles.title}>
 						MemTyles
 					</Text>
 					{showInstructions ? (
-						<DropShadow style={styles.shadow}>
-							<TouchableOpacity
-								onPress={() => setShowInstructions (false)}
-							>
-								<FontAwesomeIcon  color={'dimgray'} size={35} icon={faPlay} />	
-							</TouchableOpacity>
-						</DropShadow>
+						<TouchableOpacity
+							onPress={() => setShowInstructions (false)}
+						>
+							<FontAwesomeIcon  color={'dimgray'} size={35} icon={faPlay} />	
+						</TouchableOpacity>
 					) : (
-						<DropShadow style={styles.shadow}>
-							<TouchableOpacity
-								onPress={() => setShowInstructions (true)}
-							>
-								<FontAwesomeIcon  color={'dimgray'} size={35} icon={faQuestion} />	
-							</TouchableOpacity>
-						</DropShadow>
+						<TouchableOpacity
+							onPress={() => setShowInstructions (true)}
+						>
+							<FontAwesomeIcon  color={'dimgray'} size={35} icon={faQuestion} />	
+						</TouchableOpacity>
 					)}
 				</View>
 
@@ -255,7 +248,7 @@ const App: () => Node = () => {
 					<TouchableOpacity style={styles.button} onPress={clearBoard}>
 						<Text style={styles.buttonText}>Clear Board</Text>
 					</TouchableOpacity>
-					<View style={styles.distributed} >
+					<View renderToHardwareTextureAndroid={true} style={styles.distributed} >
 						<CardTable
 							board={board}
 							handleTyleClick={handleTyleClick}

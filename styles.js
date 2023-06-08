@@ -190,7 +190,7 @@ export default styles = StyleSheet.create({
 		marginTop         : 10,
 	},
 	logoImage             : {
-		width             : 50,
-		height            : 50,
+		width             : 35,
+		height            : 35,
 	}
 });

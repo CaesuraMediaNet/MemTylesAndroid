@@ -8,7 +8,6 @@ import styles from '../styles';
 import Card   from './Card';
 
 export default function CardTable ({board, handleTyleClick, numCards}) {
-	console.log ("CardTable : numCards : ", numCards);
 	return board.map (card => {
 			let width     = "25%";
 			let iconWidth = 75;

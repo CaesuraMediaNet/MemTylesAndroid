@@ -28,6 +28,14 @@
     {
       "path": "src/assets/fonts/OFL.txt",
       "sha1": "b3aae17fbf21057c60a4edd242c7e6bdac2fd0b7"
+    },
+    {
+      "path": "src/assets/images/memtyles-icon.png",
+      "sha1": "5b553f927c280589d5dd71c4dea123c112275bfa"
+    },
+    {
+      "path": "src/assets/images/memtyles-splash.png",
+      "sha1": "abd73d77e2f225f0bc4e7219a688755cc6701bcf"
     }
   ]
 }

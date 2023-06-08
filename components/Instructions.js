@@ -231,13 +231,11 @@ export default function Instructions ({setShowInstructions, pageRef}) {
 			//
 			if (pageNumber === 1) {
 
-				console.log ("pageNumber :", pageNumber);
 				setShowInstructions (false);
 
 			// Back a Nav page.
 			//
 			} else if (pageNumber > 1) {
-				console.log ("pageNumber :", pageNumber);
 				setPageNumber (setPageNumber => setPageNumber - 1);
 			}
 			return true;

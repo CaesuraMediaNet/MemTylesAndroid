@@ -3,7 +3,7 @@
 import React from 'react';
 export default function flipCard (card, numClicks, setNumClicks, board, setBoard) {
 
-	setNumClicks (numClicks + 1);
+	setNumClicks ((numclicks) => numClicks + 1);
 
 	// Count the number of already flipped cards, and stop if this is the third one.
 	//
@@ -77,7 +77,9 @@ export default function flipCard (card, numClicks, setNumClicks, board, setBoard
 		if (wonCount === newBoard.length) {
 			wonAll  = true;
 		}
-		setBoard (newBoard);
+		requestAnimationFrame(() => {
+			setBoard (newBoard);
+		});
 	}
 	return {won : won, wonAll : wonAll};
 }

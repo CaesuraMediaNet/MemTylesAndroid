@@ -9,7 +9,6 @@ export async function addScore (score) {
     await AsyncStorage.setItem('@storage_Key', JSON.stringify(scores))
 	  return scores;
   } catch (err) {
-    console.log ("Error with AsyncStorage.setItem : ", err);
 	return [];
   }
 }
@@ -23,7 +22,6 @@ export async function getScores () {
 		}
 		return scores;
 	} catch (err) {
-		console.log ("Error with AsyncStorage.getItem : ", err);
 		return [];
 	}
 }
@@ -31,7 +29,6 @@ export async function clearScores () {
 	try {
 		await AsyncStorage.setItem('@storage_Key', JSON.stringify([]))
 	} catch (err) {
-		console.log ("Error with AsyncStorage.getItem : ", err);
 	}
 	return [];
 }
