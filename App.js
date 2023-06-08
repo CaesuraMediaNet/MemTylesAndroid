@@ -79,10 +79,8 @@ const App: () => Node = () => {
     const [numCards, setNumCards]                   = useState(12);
     const [numClicks, setNumClicks]                 = useState(0);
     const [gameTime,setGameTime]                    = useState(0);
-    const [intervalId,setIntervalId]                = useState(-1);
     const [timerAction,setTimerAction]              = useState("start");
     const [scores,setScores]                        = useState([]);
-    const [showPrivacyLink, setShowPrivacyLink]     = useState(false);
 	const [showInstructions, setShowInstructions]   = useState(false);
 	const pageRef                                   = useRef();
 
@@ -212,6 +210,14 @@ const App: () => Node = () => {
 		clearScores();
 		setScores ([]);
 	}
+	function onInstructionsPress () {
+		setShowInstructions (true);
+
+		// Reset this if won and instructions pressed, so that when we come back to the
+		// game, the modal does not appear.
+		//
+		setWonAllPlay (false);
+	}
 	return (
 		<SafeAreaView style={styles.container}>
 			<StatusBar />
@@ -236,7 +242,7 @@ const App: () => Node = () => {
 						</TouchableOpacity>
 					) : (
 						<TouchableOpacity
-							onPress={() => setShowInstructions (true)}
+							onPress={() => onInstructionsPress ()}
 						>
 							<FontAwesomeIcon  color={'dimgray'} size={35} icon={faQuestion} />	
 						</TouchableOpacity>
@@ -286,5 +292,4 @@ const App: () => Node = () => {
 		</SafeAreaView>
   );
 };
-
 export default App;
